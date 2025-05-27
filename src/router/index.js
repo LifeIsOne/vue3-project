@@ -22,15 +22,15 @@ const routes = [
     component: BoardListView,
   },
   {
-    path: '/board/create',
+    path: '/boards/create',
     component: BoardCreateView,
   },
   {
-    path: '/board/:id',
+    path: '/boards/:id',
     component: BoardDetailView,
   },
   {
-    path: '/board/:id/edit',
+    path: '/boards/:id/edit',
     component: BoardEditView,
   },
 ]
