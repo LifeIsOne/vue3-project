@@ -27,7 +27,7 @@
             </li>
           </ul>
           <div class="d-flex" role="search">
-            <button class="btn btn-outline-dark" type="button" @click="boardCreatePage">
+            <button class="btn btn-outline-dark" type="button" @click="createBoardPage">
               Create
             </button>
           </div>
@@ -42,7 +42,10 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const boardCreatePage = () => {
-  router.push('/boards/create')
+  // router.push('/boards/create')
+  router.push({
+    name: 'BoardCreate',
+  })
 }
 </script>
 

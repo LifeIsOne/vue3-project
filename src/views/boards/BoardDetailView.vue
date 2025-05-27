@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>게시글 상세보기</h1>
+    <h1>Board Detail</h1>
     <hr class="my-3" />
     <p>prams : {{ $route.params }}</p>
     <p>query : {{ $route.query }}</p>

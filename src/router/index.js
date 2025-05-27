@@ -19,18 +19,22 @@ const routes = [
   },
   {
     path: '/boards',
+    name: 'BoardList',
     component: BoardListView,
   },
   {
     path: '/boards/create',
+    name: 'BoardCreate',
     component: BoardCreateView,
   },
   {
     path: '/boards/:id',
+    name: 'BoardDetail',
     component: BoardDetailView,
   },
   {
     path: '/boards/:id/edit',
+    naem: 'BoardEdit',
     component: BoardEditView,
   },
 ]
