@@ -34,7 +34,7 @@ const routes = [
   },
   {
     path: '/boards/:id/edit',
-    naem: 'BoardEdit',
+    name: 'BoardEdit',
     component: BoardEditView,
   },
 ]

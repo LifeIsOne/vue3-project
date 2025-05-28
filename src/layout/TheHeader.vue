@@ -23,7 +23,7 @@
               <RouterLink class="nav-link" active-class="active" to="/about">About</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" active-class="active" to="/boards">Boards</RouterLink>
+              <RouterLink class="nav-link" active-class="active" to="/boards">List</RouterLink>
             </li>
           </ul>
           <div class="d-flex" role="search">

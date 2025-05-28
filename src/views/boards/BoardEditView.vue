@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>게시글 수정</h1>
+    <h1>Board Edit</h1>
     <hr />
   </div>
 </template>
