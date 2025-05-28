@@ -27,9 +27,7 @@
             </li>
           </ul>
           <div class="d-flex" role="search">
-            <button class="btn btn-outline-dark" type="button" @click="createBoardPage">
-              Create
-            </button>
+            <button class="btn btn-primary" type="button" @click="boardCreatePage">Create</button>
           </div>
         </div>
       </div>

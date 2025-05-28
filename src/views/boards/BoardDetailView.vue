@@ -2,9 +2,11 @@
   <div>
     <h1>Board Detail</h1>
     <hr class="my-3" />
-    <h2>Title</h2>
-    <p>Content</p>
-    <p class="text-muted">2025-01-01</p>
+    <div class="bg-dark text-white p-3 mb-3 card">
+      <h2>Title</h2>
+      <p>Content</p>
+      <p class="text-secondary">2025-01-01</p>
+    </div>
     <div class="row g-1">
       <div class="col-auto">
         <button class="btn btn-outline-secondary text-white">prev</button>
