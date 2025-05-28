@@ -5,6 +5,10 @@ import BoardCreateView from '@/views/boards/BoardCreateView.vue'
 import BoardDetailView from '@/views/boards/BoardDetailView.vue'
 import BoardEditView from '@/views/boards/BoardEditView.vue'
 import BoardListView from '@/views/boards/BoardListView.vue'
+import NotFoundView from '@/views/errors/NotFoundView.vue'
+import NestedView from '@/views/nested/NestedView.vue'
+import NestedOneView from '@/views/nested/NestedOneView.vue'
+import NestedTwoView from '@/views/nested/NestedTwoView.vue'
 
 const routes = [
   {
@@ -36,6 +40,30 @@ const routes = [
     path: '/boards/:boardId/edit',
     name: 'BoardEdit',
     component: BoardEditView,
+  },
+  // Error Page Route
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFont',
+    component: NotFoundView,
+  },
+  // 중첩 컴포넌트
+  {
+    path: '/nested',
+    name: 'Nested',
+    component: NestedView,
+    children: [
+      {
+        path: 'one',
+        name: 'NestedOne',
+        component: NestedOneView,
+      },
+      {
+        path: 'two',
+        name: 'NestedTwo',
+        component: NestedTwoView,
+      },
+    ],
   },
 ]
 
