@@ -30,12 +30,12 @@ const fetchBoards = () => {
 }
 fetchBoards()
 
-const boardDetailPage = (id) => {
+const boardDetailPage = (boardId) => {
   // router.push(`boards/${id}`)
   router.push({
     name: 'BoardDetail',
     params: {
-      id,
+      boardId,
     },
   })
 }

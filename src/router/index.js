@@ -28,12 +28,12 @@ const routes = [
     component: BoardCreateView,
   },
   {
-    path: '/boards/:id',
+    path: '/boards/:boardId',
     name: 'BoardDetail',
     component: BoardDetailView,
   },
   {
-    path: '/boards/:id/edit',
+    path: '/boards/:boardId/edit',
     name: 'BoardEdit',
     component: BoardEditView,
   },

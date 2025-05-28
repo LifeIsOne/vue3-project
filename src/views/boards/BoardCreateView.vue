@@ -12,13 +12,21 @@
         <textarea class="form-control" id="content" rows="3"></textarea>
       </div>
       <div class="pt-3 d-flex gap-2">
-        <button type="button" class="btn btn-outline-secondary">BoardList</button>
+        <button type="button" class="btn btn-outline-secondary" @click="boardListPage">List</button>
         <button class="btn btn-success">Save</button>
       </div>
     </form>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const boardListPage = () => {
+  router.push({ name: 'BoardList' })
+}
+</script>
 
 <style lang="scss" scoped></style>
