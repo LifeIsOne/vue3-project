@@ -10,3 +10,8 @@ const boards = [
 export function getBoards() {
   return boards
 }
+
+export function getBoardById(id) {
+  const numberId = parseInt(id)
+  return boards.find((item) => item.id === numberId)
+}

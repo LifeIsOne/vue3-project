@@ -3,9 +3,9 @@
     <h1>Board Detail</h1>
     <hr class="my-3" />
     <div class="bg-dark text-white p-3 mb-3 card">
-      <h2>Title</h2>
-      <p>Content</p>
-      <p class="text-secondary">2025-01-01</p>
+      <h2>{{ form.title }}</h2>
+      <p>{{ form.content }}</p>
+      <p class="text-secondary">{{ form.createdAt }}</p>
     </div>
     <div class="row g-1">
       <div class="col-auto">
@@ -32,10 +32,19 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
+import { getBoardById } from '@/api/boards'
+import { ref } from 'vue'
 
 const router = useRouter()
 const route = useRoute()
-const boardId = route.params.id
+const boardId = route.params.boardId
+const form = ref()
+
+const fetchBoard = () => {
+  const data = getBoardById(boardId)
+  form.value = { ...data }
+}
+fetchBoard()
 
 const boardListPage = () => {
   router.push({ name: 'BoardList' })
