@@ -37,6 +37,7 @@ const routes = [
     name: 'BoardDetail',
     component: BoardDetailView,
     props: true,
+    props: (route) => ({ boardId: parseInt(route.params.boardId) }),
   },
   {
     path: '/boards/:boardId/edit',

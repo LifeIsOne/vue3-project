@@ -14,7 +14,7 @@
       </div>
     </div>
     <hr class="my-5" />
-    <BoardDetailView boardId="1" />
+    <BoardDetailView :boardId="1" />
   </div>
 </template>
 
