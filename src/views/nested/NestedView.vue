@@ -8,7 +8,7 @@
         <RouterLink class="nav-link" active-class="active" to="/nested/two">Nested Two</RouterLink>
       </li>
     </ul>
-    <hr class="mt-5" />
+    <hr class="mt-3" />
     <RouterView></RouterView>
   </div>
 </template>

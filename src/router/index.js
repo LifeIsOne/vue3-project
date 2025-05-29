@@ -7,6 +7,7 @@ import BoardEditView from '@/views/boards/BoardEditView.vue'
 import BoardListView from '@/views/boards/BoardListView.vue'
 import NotFoundView from '@/views/errors/NotFoundView.vue'
 import NestedView from '@/views/nested/NestedView.vue'
+import NestedHomeView from '@/views/nested/NestedHomeView.vue'
 import NestedOneView from '@/views/nested/NestedOneView.vue'
 import NestedTwoView from '@/views/nested/NestedTwoView.vue'
 
@@ -53,6 +54,11 @@ const routes = [
     name: 'Nested',
     component: NestedView,
     children: [
+      {
+        path: '',
+        name: 'NestedHome',
+        component: NestedHomeView,
+      },
       {
         path: 'one',
         name: 'NestedOne',
