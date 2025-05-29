@@ -14,13 +14,16 @@
       </div>
     </div>
     <hr class="my-5" />
-    <BoardDetailView :boardId="1" />
+    <AppCard>
+      <BoardDetailView :boardId="1" />
+    </AppCard>
   </div>
 </template>
 
 <script setup>
 import BoardItem from '@/components/boards/BoardItem.vue'
 import BoardDetailView from '@/views/boards/BoardDetailView.vue'
+import AppCard from '@/components/AppCard.vue'
 import { ref } from 'vue'
 import { getBoards } from '@/api/boards'
 import { useRouter } from 'vue-router'

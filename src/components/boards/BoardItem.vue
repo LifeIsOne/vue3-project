@@ -1,16 +1,15 @@
 <template>
-  <div class="card bg-dark text-white">
-    <div class="card-body">
-      <h5 class="card-title">{{ title }}</h5>
-      <p class="card-text">
-        {{ content }}
-      </p>
-      <p class="text-secondary">{{ createdAt }}</p>
-    </div>
-  </div>
+  <AppCard>
+    <h5 class="card-title">{{ title }}</h5>
+    <p class="card-text">
+      {{ content }}
+    </p>
+    <p class="text-secondary">{{ createdAt }}</p>
+  </AppCard>
 </template>
 
 <script setup>
+import AppCard from '@/components/AppCard.vue'
 defineProps({
   title: {
     type: String,
