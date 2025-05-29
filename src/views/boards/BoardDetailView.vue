@@ -35,13 +35,17 @@ import { useRoute, useRouter } from 'vue-router'
 import { getBoardById } from '@/api/boards'
 import { ref } from 'vue'
 
+const props = defineProps({
+  boardId: String,
+})
+
 const router = useRouter()
 const route = useRoute()
 const boardId = route.params.boardId
 const form = ref()
 
 const fetchBoard = () => {
-  const data = getBoardById(boardId)
+  const data = getBoardById(props.boardId)
   form.value = { ...data }
 }
 fetchBoard()
@@ -50,7 +54,7 @@ const boardListPage = () => {
   router.push({ name: 'BoardList' })
 }
 const boardEditPage = () => {
-  router.push({ name: 'BoardEdit', params: { boardId } })
+  router.push({ name: 'BoardEdit', params: { boardId: props.boardId } })
 }
 </script>
 

@@ -36,6 +36,7 @@ const routes = [
     path: '/boards/:boardId',
     name: 'BoardDetail',
     component: BoardDetailView,
+    props: true,
   },
   {
     path: '/boards/:boardId/edit',
