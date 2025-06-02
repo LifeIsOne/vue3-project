@@ -31,8 +31,19 @@ import { useRouter } from 'vue-router'
 const boards = ref()
 const router = useRouter()
 
-const fetchBoards = () => {
-  boards.value = getBoards()
+const fetchBoards = async () => {
+  // async/await
+  const { data } = await getBoards()
+  boards.value = data
+
+  // // then(), catch()
+  // getBoards()
+  //   .then((resp) => {
+  //     console.log('resp : ', resp)
+  //   })
+  //   .catch((err) => {
+  //     console.log('err : ', err)
+  //   })
 }
 fetchBoards()
 

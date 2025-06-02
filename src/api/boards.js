@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const boards = [
   { id: 1, title: 'title01', content: 'content01', createdAt: '2025-01-01' },
   { id: 2, title: 'title02', content: 'content02', createdAt: '2025-02-02' },
@@ -8,8 +10,21 @@ const boards = [
 
 // 목록 조회
 export function getBoards() {
-  return boards
+  return axios.get('http://localhost:5001/boards')
 }
+// 상세 조회
 export function getBoardById(id) {
-  return boards.find((item) => item.id === id)
+  return axios.get('http://localhost:5001/boards/' + id)
+}
+// 생성
+export function createBoard(data) {
+  return axios.post('http://localhost:5001/boards', data)
+}
+// 수정
+export function updateBoard(id, data) {
+  return axios.put('http://localhost:5001/boards/' + id, data)
+}
+// 삭제
+export function deleteBoard(id) {
+  return axios.delete(id)
 }
