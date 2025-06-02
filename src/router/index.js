@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import AboutView from '@/views/AboutView.vue'
 import BoardCreateView from '@/views/boards/BoardCreateView.vue'
@@ -36,7 +36,7 @@ const routes = [
     path: '/boards/:boardId',
     name: 'BoardDetail',
     component: BoardDetailView,
-    props: true,
+    // props: true,
     props: (route) => ({ boardId: parseInt(route.params.boardId) }),
   },
   {
@@ -77,6 +77,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory('/'),
+  // history: createWebHashHistory('/'),
   routes,
 })
 
