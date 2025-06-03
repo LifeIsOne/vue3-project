@@ -29,9 +29,9 @@ const boardForm = ref({
   title: null,
   content: null,
 })
-const boardSave = () => {
+const boardSave = async () => {
   try {
-    createBoard({
+    await createBoard({
       ...boardForm.value,
       createdAt: Date.now(),
     })
