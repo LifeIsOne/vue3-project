@@ -3,9 +3,9 @@
     <h1>Board Detail</h1>
     <hr class="my-3" />
     <div class="bg-dark text-white p-3 mb-3 card">
-      <h2>{{ form.title }}</h2>
-      <p>{{ form.content }}</p>
-      <p class="text-secondary">{{ form.createdAt }}</p>
+      <h2>{{ board.title }}</h2>
+      <p>{{ board.content }}</p>
+      <p class="text-secondary">{{ board.createdAt }}</p>
     </div>
     <div class="row g-1">
       <div class="col-auto">
@@ -42,11 +42,17 @@ const props = defineProps({
 const router = useRouter()
 const route = useRoute()
 const boardId = route.params.boardId
-const form = ref()
+const board = ref({})
 
-const fetchBoard = () => {
-  const data = getBoardById(props.boardId)
-  form.value = { ...data }
+const fetchBoard = async () => {
+  const { data } = await getBoardById(props.boardId)
+  setBoard(data)
+  // board.value = { ...data }
+}
+const setBoard = ({ title, content, createdAt }) => {
+  board.value.title = title
+  board.value.content = content
+  board.value.createdAt = createdAt
 }
 fetchBoard()
 
