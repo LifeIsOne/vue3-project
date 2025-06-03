@@ -32,11 +32,18 @@ const boards = ref()
 const router = useRouter()
 
 const fetchBoards = async () => {
-  // async/await
-  const { data } = await getBoards()
-  boards.value = data
+  // // 3.구조 분해 할당 응용
+  // ({ data: boards.value } = await getBoards())
 
-  // // then(), catch()
+  // 2. async/await, 구조 분해 할당
+  try {
+    const { data } = await getBoards()
+    boards.value = data
+  } catch (err) {
+    console.error(err)
+  }
+
+  // 1. // then(), catch()
   // getBoards()
   //   .then((resp) => {
   //     console.log('resp : ', resp)

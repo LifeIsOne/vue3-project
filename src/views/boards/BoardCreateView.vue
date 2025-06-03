@@ -2,14 +2,14 @@
   <div>
     <h1>Create Board</h1>
     <hr />
-    <form @submit.prevent>
+    <form @submit.prevent="boardSave">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" />
+        <input v-model="boardForm.title" type="text" class="form-control" id="title" />
       </div>
       <div class="mb-3">
         <label for="content" class="form-label">Content</label>
-        <textarea class="form-control" id="content" rows="3"></textarea>
+        <textarea v-model="boardForm.content" class="form-control" id="content" rows="3"></textarea>
       </div>
       <div class="pt-3 d-flex gap-2">
         <button type="button" class="btn btn-outline-secondary" @click="boardListPage">List</button>
@@ -20,9 +20,26 @@
 </template>
 
 <script setup>
+import { createBoard } from '@/api/boards'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const boardForm = ref({
+  title: null,
+  content: null,
+})
+const boardSave = () => {
+  try {
+    createBoard({
+      ...boardForm.value,
+      createdAt: Date.now(),
+    })
+    router.push({ name: 'BoardList' })
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 const boardListPage = () => {
   router.push({ name: 'BoardList' })
