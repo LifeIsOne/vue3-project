@@ -2,7 +2,7 @@
   <div>
     <h1>Board Edit</h1>
     <hr />
-    <form @submit.prevent="boardEdit">
+    <form @submit.prevent="editBoard">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Title</label>
         <input v-model="boardForm.title" type="text" class="form-control" id="title" />
@@ -45,7 +45,7 @@ const setBoardForm = ({ title, content }) => {
 }
 fetchBoard()
 
-const boardEdit = async () => {
+const editBoard = async () => {
   try {
     await updateBoard(boardId, { ...boardForm.value })
     router.push({ name: 'BoardDetail', params: { boardId } })

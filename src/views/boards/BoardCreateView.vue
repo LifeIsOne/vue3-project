@@ -2,7 +2,7 @@
   <div>
     <h1>Create Board</h1>
     <hr />
-    <form @submit.prevent="boardSave">
+    <form @submit.prevent="saveBoard">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Title</label>
         <input v-model="boardForm.title" type="text" class="form-control" id="title" />
@@ -29,7 +29,8 @@ const boardForm = ref({
   title: null,
   content: null,
 })
-const boardSave = async () => {
+
+const saveBoard = async () => {
   try {
     await createBoard({
       ...boardForm.value,
