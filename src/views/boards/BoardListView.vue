@@ -28,13 +28,10 @@ import { ref } from 'vue'
 import { getBoards } from '@/api/boards'
 import { useRouter } from 'vue-router'
 
-const boards = ref()
 const router = useRouter()
+const boards = ref({})
 
 const fetchBoards = async () => {
-  // // 3.구조 분해 할당 응용
-  // ({ data: boards.value } = await getBoards())
-
   // 2. async/await, 구조 분해 할당
   try {
     const { data } = await getBoards()
@@ -42,6 +39,8 @@ const fetchBoards = async () => {
   } catch (err) {
     console.error(err)
   }
+  // // 3.구조 분해 할당 응용
+  // ({ data: boards.value } = await getBoards())
 
   // 1. // then(), catch()
   // getBoards()

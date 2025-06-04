@@ -13,18 +13,19 @@ export function getBoards() {
   return axios.get('http://localhost:5001/boards')
 }
 // 상세 조회
-export function getBoardById(id) {
-  return axios.get('http://localhost:5001/boards/' + id)
+export function getBoardById(boadId) {
+  // return axios.get('http://localhost:5001/boards/' + id)
+  return axios.get(`http://localhost:5001/boards/${boadId}`)
 }
 // 생성
 export function createBoard(data) {
   return axios.post('http://localhost:5001/boards', data)
 }
 // 수정
-export function updateBoard(id, data) {
-  return axios.put('http://localhost:5001/boards/' + id, data)
+export function updateBoard(boadId, data) {
+  return axios.put(`http://localhost:5001/boards/${boadId}`, data)
 }
 // 삭제
-export function deleteBoard(id) {
-  return axios.delete(id)
+export function deleteBoard(boadId) {
+  return axios.delete(`http://localhost:5001/boards/${boadId}`)
 }

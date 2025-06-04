@@ -24,7 +24,7 @@
         <button class="btn btn-outline-success" @click="boardEditPage">Edit</button>
       </div>
       <div class="col-auto">
-        <button class="btn btn-outline-danger">Delete</button>
+        <button class="btn btn-outline-danger" @click="removeBoard">Delete</button>
       </div>
     </div>
   </div>
@@ -32,7 +32,7 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { getBoardById } from '@/api/boards'
+import { deleteBoard, getBoardById } from '@/api/boards'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -55,6 +55,15 @@ const setBoard = ({ title, content, createdAt }) => {
   board.value.createdAt = createdAt
 }
 fetchBoard()
+
+const removeBoard = async () => {
+  try {
+    await deleteBoard(props.boardId)
+    router.push({ name: 'BoardList' })
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 const boardListPage = () => {
   router.push({ name: 'BoardList' })
