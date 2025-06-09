@@ -13,6 +13,24 @@
           />
       </div>
     </div>
+    <!-- 페이징 -->
+    <nav class="mt-5 bg-dart" aria-label="Page navigation example">
+      <ul class="pagination justify-content-center text-light">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
     <hr class="my-5" />
     <AppCard>
       <BoardDetailView :boardId="1" />
@@ -30,11 +48,15 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const boards = ref({})
+const params = ref({
+  _sort: 'createdAt',
+  _order: 'desc',
+})
 
 const fetchBoards = async () => {
   // 2. async/await, 구조 분해 할당
   try {
-    const { data } = await getBoards()
+    const { data } = await getBoards(params.value)
     boards.value = data
   } catch (err) {
     console.error(err)
@@ -65,3 +87,10 @@ const boardDetailPage = (boardId) => {
 </script>
 
 <style lang="scss" scoped></style>
+<style>
+.page-link {
+  background: #212529;
+  color: #fff;
+  border: none;
+}
+</style>
