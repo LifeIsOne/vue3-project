@@ -45,11 +45,16 @@ const boardId = route.params.boardId
 const board = ref({})
 
 const fetchBoard = async () => {
-  const { data } = await getBoardById(props.boardId)
-  setBoard(data)
-  // board.value = { ...data }
+  try {
+    const { data } = await getBoardById(props.boardId)
+    setBoard(data)
+    // board.value = { ...data } 어떤 데이터가 올 지 알지 못하기 때문에
+  } catch (err) {
+    console.error(err)
+  }
 }
 const setBoard = ({ title, content, createdAt }) => {
+  // 원하는 데이터만 구조 분해 할당으로 파라메터로 선언
   board.value.title = title
   board.value.content = content
   board.value.createdAt = createdAt
@@ -58,6 +63,9 @@ fetchBoard()
 
 const removeBoard = async () => {
   try {
+    if (confirm('Confirm delete?') === false) {
+      return
+    }
     await deleteBoard(props.boardId)
     router.push({ name: 'BoardList' })
   } catch (err) {

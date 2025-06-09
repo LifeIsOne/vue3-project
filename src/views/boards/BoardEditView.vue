@@ -36,8 +36,12 @@ const boardForm = ref({
 
 // 1. 조회
 const fetchBoard = async () => {
-  const { data } = await getBoardById(boardId)
-  setBoardForm(data)
+  try {
+    const { data } = await getBoardById(boardId)
+    setBoardForm(data)
+  } catch (err) {
+    console.error(err)
+  }
 }
 const setBoardForm = ({ title, content }) => {
   boardForm.value.title = title
