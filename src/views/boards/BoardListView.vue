@@ -1,6 +1,24 @@
 <template>
   <div>
     <h1>Board List</h1>
+    <hr class="my-4" />
+    <!-- 검색 폼 -->
+    <form @submit.prevent>
+      <div class="row g-3">
+        <div class="col">
+          <input v-model="params.title_like" type="text" class="form-control" />
+        </div>
+        <!-- n개씩 보기 -->
+        <div class="col-3">
+          <select v-model="params._limit" class="form-select">
+            <option value="3">Show 3</option>
+            <option value="6">Show 6</option>
+            <option value="9">Show 9</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
     <hr class="my-3" />
     <div class="row g-1">
       <div v-for="board in boards" :key="board.id" class="col-4">
@@ -62,6 +80,7 @@ const params = ref({
   _order: 'desc',
   _page: 1,
   _limit: 3,
+  title_like: '',
 })
 const totalBoardCount = ref(0)
 const pageCount = computed(() => Math.ceil(totalBoardCount.value / params.value._limit))
