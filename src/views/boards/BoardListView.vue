@@ -16,16 +16,24 @@
     <!-- 페이징 -->
     <nav class="mt-5 bg-dart" aria-label="Page navigation example">
       <ul class="pagination justify-content-center text-light">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
+        <!-- prev -->
+        <li class="page-item" :class="{ disabled: params._page <= 1 }">
+          <a class="page-link" href="#" aria-label="Previous" @click.prevent="--params._page">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
+        <!-- page -->
+        <li
+          v-for="page in pageCount"
+          :key="page"
+          class="page-item"
+          :class="{ active: params._page === page }"
+        >
+          <a class="page-link" href="#" @click.prevent="params._page = page">{{ page }}</a>
+        </li>
+        <!-- next -->
+        <li class="page-item" :class="{ disabled: params._page >= pageCount }">
+          <a class="page-link" href="#" aria-label="Next" @click.prevent="++params._page">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
@@ -42,38 +50,34 @@
 import BoardItem from '@/components/boards/BoardItem.vue'
 import BoardDetailView from '@/views/boards/BoardDetailView.vue'
 import AppCard from '@/components/AppCard.vue'
-import { ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { getBoards } from '@/api/boards'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const boards = ref({})
+
 const params = ref({
   _sort: 'createdAt',
   _order: 'desc',
+  _page: 1,
+  _limit: 3,
 })
+const totalBoardCount = ref(0)
+const pageCount = computed(() => Math.ceil(totalBoardCount.value / params.value._limit))
 
 const fetchBoards = async () => {
-  // 2. async/await, 구조 분해 할당
   try {
-    const { data } = await getBoards(params.value)
+    const { data, headers } = await getBoards(params.value)
     boards.value = data
+    totalBoardCount.value = headers['x-total-count']
   } catch (err) {
     console.error(err)
   }
-  // // 3.구조 분해 할당 응용
-  // ({ data: boards.value } = await getBoards())
-
-  // 1. // then(), catch()
-  // getBoards()
-  //   .then((resp) => {
-  //     console.log('resp : ', resp)
-  //   })
-  //   .catch((err) => {
-  //     console.log('err : ', err)
-  //   })
 }
-fetchBoards()
+// fetchBoards()
+
+watchEffect(fetchBoards)
 
 const boardDetailPage = (boardId) => {
   // router.push(`boards/${id}`)
