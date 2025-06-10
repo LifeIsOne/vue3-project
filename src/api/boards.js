@@ -1,23 +1,22 @@
-import axios from 'axios'
+import { boards } from '.'
 
 // 목록 조회
 export function getBoards(params) {
-  return axios.get('http://localhost:5001/boards', { params })
+  return boards.get('', { params })
 }
 // 상세 조회
 export function getBoardById(boadId) {
-  // return axios.get('http://localhost:5001/boards/' + id)
-  return axios.get(`http://localhost:5001/boards/${boadId}`)
+  return boards.get(boadId)
 }
 // 생성
 export function createBoard(data) {
-  return axios.post('http://localhost:5001/boards', data)
+  return boards.post('', data)
 }
 // 수정
 export function updateBoard(boadId, data) {
-  return axios.put(`http://localhost:5001/boards/${boadId}`, data)
+  return boards.put(boadId, data)
 }
 // 삭제
 export function deleteBoard(boadId) {
-  return axios.delete(`http://localhost:5001/boards/${boadId}`)
+  return boards.delete(boadId)
 }

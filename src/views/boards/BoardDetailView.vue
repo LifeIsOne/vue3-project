@@ -36,7 +36,7 @@ import { deleteBoard, getBoardById } from '@/api/boards'
 import { ref } from 'vue'
 
 const props = defineProps({
-  boardId: Number,
+  boardId: String,
 })
 
 const router = useRouter()
