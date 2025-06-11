@@ -14,8 +14,11 @@ export function createBoard(data) {
 }
 // 수정
 export function updateBoard(boadId, data) {
-  return boards.put(boadId, data)
+  return boards.patch(boadId, data)
 }
+// export function updateBoard(boadId, data) {
+//   return boards.put(boadId, data)
+// }
 // 삭제
 export function deleteBoard(boadId) {
   return boards.delete(boadId)

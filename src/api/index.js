@@ -5,4 +5,6 @@ function create(baseURL, options) {
   return instance
 }
 
-export const boards = create('http://localhost:5001/boards/')
+// export const boards = create('http://localhost:5001/boards/')
+export const boards = create(import.meta.env.VITE_APP_API_URL + 'boards/')
+// export const boards = create(`${import.meta.env.VITE_APP_API_URL}boards/`)
