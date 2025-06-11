@@ -18,6 +18,7 @@
         <button class="btn btn-outline-success">Save</button>
       </div>
     </form>
+    <AppAlert :show="showAlert" :msg="alertMsg" :type="alertType" />
   </div>
 </template>
 
@@ -25,6 +26,7 @@
 import { getBoardById, updateBoard } from '@/api/boards'
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import AppAlert from '@/components/AppAlert.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -41,6 +43,7 @@ const fetchBoard = async () => {
     setBoardForm(data)
   } catch (err) {
     console.error(err)
+    vAlert('Network Error!')
   }
 }
 const setBoardForm = ({ title, content }) => {
@@ -52,7 +55,8 @@ fetchBoard()
 const editBoard = async () => {
   try {
     await updateBoard(boardId, { ...boardForm.value })
-    router.push({ name: 'BoardDetail', params: { boardId } })
+    // router.push({ name: 'BoardDetail', params: { boardId } })
+    vAlert('Edit complete!', 'success')
   } catch (err) {
     console.error(err)
   }
@@ -62,10 +66,19 @@ const boardDetailPage = () => {
   router.push(`/boards/${route.params.id}`)
 }
 
-// const boardId = route.params.id
-// const boardDetailPage = () => {
-//   router.push({ name: 'BoardDetail', params: boardId })
-// }
+// Alert
+const showAlert = ref(false)
+const alertMsg = ref('')
+const alertType = ref('error')
+
+const vAlert = (msg, type) => {
+  showAlert.value = true
+  alertMsg.value = msg
+  alertType.value = type
+  setTimeout(() => {
+    showAlert.value = false
+  }, 2000)
+}
 </script>
 
 <style lang="scss" scoped></style>

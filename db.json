@@ -1,9 +1,10 @@
 {
   "boards": [
     {
+      "id": 1,
       "title": "title01",
       "content": "content01",
-      "id": 1
+      "createdAt": "2025-01-01"
     },
     {
       "id": 2,
