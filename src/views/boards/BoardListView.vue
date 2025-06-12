@@ -28,10 +28,11 @@
           :content="board.content"
           :created-at="board.createdAt"
           @click="boardDetailPage(board.id)"
+          @modal="openModal(item)"
           />
       </div>
     </div>
-    <!-- 페이징 -->
+    <!-- 페이징 start -->
     <nav class="mt-5 bg-dart" aria-label="Page navigation example">
       <ul class="pagination justify-content-center text-light">
         <!-- prev -->
@@ -57,6 +58,17 @@
         </li>
       </ul>
     </nav>
+    <!-- 페이징 end -->
+
+    <!-- Modal -->
+    <AppModal :show="show" title="BOARD" @close="closeModal">
+      <template #actions>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="closeModal">
+          Close
+        </button>
+      </template>
+    </AppModal>
+
     <hr class="my-5" />
     <AppCard>
       <BoardDetailView :boardId="1" />
@@ -68,6 +80,7 @@
 import BoardItem from '@/components/boards/BoardItem.vue'
 import BoardDetailView from '@/views/boards/BoardDetailView.vue'
 import AppCard from '@/components/AppCard.vue'
+import AppModal from '@/components/AppModal.vue'
 import { computed, ref, watchEffect } from 'vue'
 import { getBoards } from '@/api/boards'
 import { useRouter } from 'vue-router'
@@ -106,6 +119,15 @@ const boardDetailPage = (boardId) => {
       boardId,
     },
   })
+}
+
+// Modal
+const show = ref(false)
+const openModal = () => {
+  show.value = true
+}
+const closeModal = () => {
+  show.value = false
 }
 </script>
 
