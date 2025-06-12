@@ -18,7 +18,8 @@
         <button class="btn btn-outline-success">Save</button>
       </div>
     </form>
-    <AppAlert :show="showAlert" :msg="alertMsg" :type="alertType" />
+    <!-- <AppAlert :show="showAlert" :msg="alertMsg" :type="alertType" /> -->
+    <AppAlert :items="alerts" />
   </div>
 </template>
 
@@ -43,7 +44,7 @@ const fetchBoard = async () => {
     setBoardForm(data)
   } catch (err) {
     console.error(err)
-    vAlert('Network Error!')
+    vAlert(err.message)
   }
 }
 const setBoardForm = ({ title, content }) => {
@@ -59,6 +60,7 @@ const editBoard = async () => {
     vAlert('Edit complete!', 'success')
   } catch (err) {
     console.error(err)
+    vAlert(err.message)
   }
 }
 
@@ -67,16 +69,19 @@ const boardDetailPage = () => {
 }
 
 // Alert
-const showAlert = ref(false)
-const alertMsg = ref('')
-const alertType = ref('error')
+// const showAlert = ref(false)
+// const alertMsg = ref('')
+// const alertType = ref('error')
+const alerts = ref([])
 
 const vAlert = (msg, type) => {
-  showAlert.value = true
-  alertMsg.value = msg
-  alertType.value = type
+  // showAlert.value = true
+  // alertMsg.value = msg
+  // alertType.value = type
+  alerts.value.push({ msg, type })
   setTimeout(() => {
-    showAlert.value = false
+    // showAlert.value = false
+    alerts.value.shift()
   }, 3000)
 }
 </script>
