@@ -61,23 +61,12 @@
     <!-- 페이징 end -->
 
     <!-- Modal -->
-    <AppModal v-model="show" :show="show" title="BOARD">
-      <template #default>
-        <div class="row">
-          <div class="col-3 text-secondary">Title</div>
-          <div class="col-9">{{ modalTitle }}</div>
-          <div class="col-3 text-secondary">Content</div>
-          <div class="col-9">{{ modalContent }}</div>
-          <div class="col-3 text-secondary">Created At</div>
-          <div class="col-9">{{ modalCreatedAt }}</div>
-        </div>
-      </template>
-      <template #actions>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="closeModal">
-          Close
-        </button>
-      </template>
-    </AppModal>
+    <BoardModal
+      v-model="show"
+      :title="modalTitle"
+      :content="modalContent"
+      :createdAt="modalCreatedAt"
+    />
 
     <hr class="my-5" />
     <AppCard>
@@ -90,7 +79,7 @@
 import BoardItem from '@/components/boards/BoardItem.vue'
 import BoardDetailView from '@/views/boards/BoardDetailView.vue'
 import AppCard from '@/components/AppCard.vue'
-import AppModal from '@/components/AppModal.vue'
+import BoardModal from '@/views/boards/BoardModal.vue'
 import { computed, ref, watchEffect } from 'vue'
 import { getBoards } from '@/api/boards'
 import { useRouter } from 'vue-router'
@@ -142,9 +131,6 @@ const openModal = ({ title, content, createdAt }) => {
   modalTitle.value = title
   modalContent.value = content
   modalCreatedAt.value = createdAt
-}
-const closeModal = () => {
-  show.value = false
 }
 </script>
 
