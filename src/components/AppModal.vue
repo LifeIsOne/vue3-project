@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show">
+  <div v-if="modelValue">
     <!-- 오버레이 -->
     <div class="modal-backdrop fade show"></div>
     <!-- 모달 -->
@@ -20,7 +20,7 @@
                 class="btn-close btn-close-white"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-                @click="$emit(close)"
+                @click="$emit('update:modelValue', false)"
               ></button>
             </slot>
           </div>
@@ -36,10 +36,10 @@
 
 <script setup>
 defineProps({
-  show: Boolean,
+  modelValue: Boolean,
   title: String,
 })
-defineEmits(['close'])
+defineEmits(['close', 'update:modelValue'])
 </script>
 
 <style lang="scss" scoped></style>

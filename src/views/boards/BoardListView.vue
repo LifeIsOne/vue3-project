@@ -28,7 +28,7 @@
           :content="board.content"
           :created-at="board.createdAt"
           @click="boardDetailPage(board.id)"
-          @modal="openModal(item)"
+          @modal="openModal(board)"
           />
       </div>
     </div>
@@ -61,7 +61,17 @@
     <!-- 페이징 end -->
 
     <!-- Modal -->
-    <AppModal :show="show" title="BOARD" @close="closeModal">
+    <AppModal v-model="show" :show="show" title="BOARD">
+      <template #default>
+        <div class="row">
+          <div class="col-3 text-secondary">Title</div>
+          <div class="col-9">{{ modalTitle }}</div>
+          <div class="col-3 text-secondary">Content</div>
+          <div class="col-9">{{ modalContent }}</div>
+          <div class="col-3 text-secondary">Created At</div>
+          <div class="col-9">{{ modalCreatedAt }}</div>
+        </div>
+      </template>
       <template #actions>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="closeModal">
           Close
@@ -122,9 +132,16 @@ const boardDetailPage = (boardId) => {
 }
 
 // Modal
-const show = ref(false)
-const openModal = () => {
+const show = ref(false) // 기본값
+const modalTitle = ref('')
+const modalContent = ref('')
+const modalCreatedAt = ref('')
+
+const openModal = ({ title, content, createdAt }) => {
   show.value = true
+  modalTitle.value = title
+  modalContent.value = content
+  modalCreatedAt.value = createdAt
 }
 const closeModal = () => {
   show.value = false

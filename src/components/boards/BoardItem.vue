@@ -8,7 +8,7 @@
     <template #footer>
       <div class="d-flex flex-row-reverse">
         <button class="btn p-0 text-white" @click.stop="$emit('modal')">
-          <i class="bi bi-search"></i>
+          <i class="bi bi-search p-2"></i>
         </button>
       </div>
     </template>
