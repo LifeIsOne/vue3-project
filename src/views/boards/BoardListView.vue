@@ -61,12 +61,14 @@
     <!-- 페이징 end -->
 
     <!-- Modal -->
-    <BoardModal
-      v-model="show"
-      :title="modalTitle"
-      :content="modalContent"
-      :createdAt="modalCreatedAt"
-    />
+    <Teleport to="#modal">
+      <BoardModal
+        v-model="show"
+        :title="modalTitle"
+        :content="modalContent"
+        :createdAt="modalCreatedAt"
+      />
+    </Teleport>
 
     <hr class="my-5" />
     <AppCard>
@@ -79,7 +81,7 @@
 import BoardItem from '@/components/boards/BoardItem.vue'
 import BoardDetailView from '@/views/boards/BoardDetailView.vue'
 import AppCard from '@/components/AppCard.vue'
-import BoardModal from '@/views/boards/BoardModal.vue'
+import BoardModal from '@/views/boards/BoardModal.vue'
 import { computed, ref, watchEffect } from 'vue'
 import { getBoards } from '@/api/boards'
 import { useRouter } from 'vue-router'
