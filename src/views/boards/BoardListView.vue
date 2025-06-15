@@ -72,7 +72,7 @@
 
     <hr class="my-5" />
     <AppCard>
-      <BoardDetailView :boardId="1" />
+      <BoardDetailView :boardId="'1'" />
     </AppCard>
   </div>
 </template>
