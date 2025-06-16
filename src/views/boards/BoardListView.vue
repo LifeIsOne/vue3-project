@@ -80,7 +80,6 @@
 <script setup>
 import BoardItem from '@/components/boards/BoardItem.vue'
 import BoardDetailView from '@/views/boards/BoardDetailView.vue'
-import AppCard from '@/components/AppCard.vue'
 import BoardModal from '@/views/boards/BoardModal.vue'
 import { computed, ref, watchEffect } from 'vue'
 import { getBoards } from '@/api/boards'

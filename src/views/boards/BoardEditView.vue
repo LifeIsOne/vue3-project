@@ -27,7 +27,6 @@
 import { getBoardById, updateBoard } from '@/api/boards'
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import AppAlert from '@/components/AppAlert.vue'
 
 const route = useRoute()
 const router = useRouter()

@@ -8,15 +8,11 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
-import objPlugins from './plugins/obj'
-import funcPlugins from './plugins/func'
-import person from './plugins/person'
+import globalComponent from './plugins/global-component'
 
 const app = createApp(App)
 app.use(router).mount('#app')
-app.use(objPlugins, { name: '🚀Matthew' })
-app.use(funcPlugins)
-app.use(person, { name: 'NoSeung' })
+app.use(globalComponent)
 
 // console.log('MODE : ', import.meta.env.MODE)
 // console.log('BASE_URL : ', import.meta.env.BASE_URL)
