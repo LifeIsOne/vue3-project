@@ -8,7 +8,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
-import globalComponent from './plugins/global-component'
+// import globalComponent from './plugins/global-component'
 
 const app = createApp(App)
 app.use(router).mount('#app')
