@@ -6,7 +6,7 @@ export function getBoards(params) {
 }
 // 상세 조회
 export function getBoardById(boardId) {
-  return boards.get('', boardId)
+  return boards.get(boardId)
 }
 // 생성
 export function createBoard(data) {

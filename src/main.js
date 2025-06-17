@@ -12,7 +12,7 @@ import App from './App.vue'
 
 const app = createApp(App)
 app.use(router).mount('#app')
-app.use(globalComponent)
+// app.use(globalComponent)
 
 // console.log('MODE : ', import.meta.env.MODE)
 // console.log('BASE_URL : ', import.meta.env.BASE_URL)
