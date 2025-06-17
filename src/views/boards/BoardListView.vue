@@ -32,33 +32,12 @@
           />
       </div>
     </div>
-    <!-- 페이징 start -->
-    <nav class="mt-5 bg-dart" aria-label="Page navigation example">
-      <ul class="pagination justify-content-center text-light">
-        <!-- prev -->
-        <li class="page-item" :class="{ disabled: params._page <= 1 }">
-          <a class="page-link" href="#" aria-label="Previous" @click.prevent="--params._page">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <!-- page -->
-        <li
-          v-for="page in pageCount"
-          :key="page"
-          class="page-item"
-          :class="{ active: params._page === page }"
-        >
-          <a class="page-link" href="#" @click.prevent="params._page = page">{{ page }}</a>
-        </li>
-        <!-- next -->
-        <li class="page-item" :class="{ disabled: params._page >= pageCount }">
-          <a class="page-link" href="#" aria-label="Next" @click.prevent="++params._page">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <!-- 페이징 end -->
+    <!-- 페이징 -->
+    <AppPagination
+      :current-page="params._page"
+      :page-count="pageCount"
+      @page="(page) => (params._page = page)"
+    />
 
     <!-- Modal -->
     <Teleport to="#modal">
@@ -81,6 +60,7 @@
 import BoardItem from '@/components/boards/BoardItem.vue'
 import BoardDetailView from '@/views/boards/BoardDetailView.vue'
 import BoardModal from '@/views/boards/BoardModal.vue'
+import AppPagination from '@/components/AppPagination.vue'
 import { computed, ref, watchEffect } from 'vue'
 import { getBoards } from '@/api/boards'
 import { useRouter } from 'vue-router'

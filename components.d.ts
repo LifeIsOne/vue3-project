@@ -11,6 +11,7 @@ declare module 'vue' {
     AppAlert: typeof import('./src/components/app/AppAlert.vue')['default']
     AppCard: typeof import('./src/components/app/AppCard.vue')['default']
     AppModal: typeof import('./src/components/app/AppModal.vue')['default']
+    AppPagination: typeof import('./src/components/AppPagination.vue')['default']
     BoardForm: typeof import('./src/components/BoardForm.vue')['default']
     BoardItem: typeof import('./src/components/boards/BoardItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
