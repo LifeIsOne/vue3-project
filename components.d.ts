@@ -10,6 +10,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppAlert: typeof import('./src/components/app/AppAlert.vue')['default']
     AppCard: typeof import('./src/components/app/AppCard.vue')['default']
+    AppGrid: typeof import('./src/components/AppItemGrid.vue')['default']
+    AppItemGrid: typeof import('./src/components/AppItemGrid.vue')['default']
     AppModal: typeof import('./src/components/app/AppModal.vue')['default']
     AppPagination: typeof import('./src/components/AppPagination.vue')['default']
     BoardForm: typeof import('./src/components/BoardForm.vue')['default']

@@ -20,16 +20,20 @@
     </form>
 
     <hr class="my-3" />
+    <AppGrid :items="boards">
+      <template v-slot="{ item }">
+        <BoardItem
+          :title="item.title"
+          :content="item.content"
+          :created-at="item.createdAt"
+          @click="boardDetailPage(item.id)"
+          @modal="openModal(item)"
+        />
+      </template>
+    </AppGrid>
     <div class="row g-1">
       <div v-for="board in boards" :key="board.id" class="col-4">
         <!-- prettier-ignore -->
-        <BoardItem
-          :title="board.title"
-          :content="board.content"
-          :created-at="board.createdAt"
-          @click="boardDetailPage(board.id)"
-          @modal="openModal(board)"
-          />
       </div>
     </div>
     <!-- 페이징 -->
@@ -61,6 +65,7 @@ import BoardItem from '@/components/boards/BoardItem.vue'
 import BoardDetailView from '@/views/boards/BoardDetailView.vue'
 import BoardModal from '@/views/boards/BoardModal.vue'
 import AppPagination from '@/components/AppPagination.vue'
+import AppGrid from '@/components/AppItemGrid.vue'
 import { computed, ref, watchEffect } from 'vue'
 import { getBoards } from '@/api/boards'
 import { useRouter } from 'vue-router'
