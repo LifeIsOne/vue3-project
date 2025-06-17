@@ -3,23 +3,10 @@
     <h1>Board List</h1>
     <hr class="my-4" />
     <!-- 검색 폼 -->
-    <form @submit.prevent>
-      <div class="row g-3">
-        <div class="col">
-          <input v-model="params.title_like" type="text" class="form-control" />
-        </div>
-        <!-- n개씩 보기 -->
-        <div class="col-3">
-          <select v-model="params._limit" class="form-select">
-            <option value="3">Show 3</option>
-            <option value="6">Show 6</option>
-            <option value="9">Show 9</option>
-          </select>
-        </div>
-      </div>
-    </form>
+    <BoardFilter v-model:title="params.title_like" v-model:limit="params._limit" />
 
     <hr class="my-3" />
+    <!-- Board item -->
     <AppGrid :items="boards">
       <template v-slot="{ item }">
         <BoardItem
@@ -66,6 +53,7 @@ import BoardDetailView from '@/views/boards/BoardDetailView.vue'
 import BoardModal from '@/views/boards/BoardModal.vue'
 import AppPagination from '@/components/AppPagination.vue'
 import AppGrid from '@/components/AppItemGrid.vue'
+import BoardFilter from '@/components/BoardFilter.vue'
 import { computed, ref, watchEffect } from 'vue'
 import { getBoards } from '@/api/boards'
 import { useRouter } from 'vue-router'

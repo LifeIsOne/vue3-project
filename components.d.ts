@@ -14,6 +14,7 @@ declare module 'vue' {
     AppItemGrid: typeof import('./src/components/AppItemGrid.vue')['default']
     AppModal: typeof import('./src/components/app/AppModal.vue')['default']
     AppPagination: typeof import('./src/components/AppPagination.vue')['default']
+    BoardFilter: typeof import('./src/components/BoardFilter.vue')['default']
     BoardForm: typeof import('./src/components/BoardForm.vue')['default']
     BoardItem: typeof import('./src/components/boards/BoardItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
