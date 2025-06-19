@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-icons/font/bootstrap-icons'
 import 'bootstrap/dist/js/bootstrap.js'
 import router from './router'
+// import focus from '@/directives/focus'
+import globalDirectives from './plugins/global-directives'
 
 import './assets/main.css'
 
@@ -12,6 +14,8 @@ import App from './App.vue'
 
 const app = createApp(App)
 app.use(router).mount('#app')
+// app.directive('focus', focus)
+app.use(globalDirectives)
 // app.use(globalComponent)
 
 // console.log('MODE : ', import.meta.env.MODE)
