@@ -22,7 +22,7 @@ export default {
 
 <script setup>
 import { useRouter } from 'vue-router'
-import AppGrid from '@/components/AppItemGrid.vue'
+import AppGrid from '@/components/app/AppItemGrid.vue'
 import AppCard from '@/components/app/AppCard.vue'
 import { ref } from 'vue'
 

@@ -19,7 +19,7 @@
 import { createBoard } from '@/api/boards'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import BoardForm from '@/components/BoardForm.vue'
+import BoardForm from '@/components/boards/BoardForm.vue'
 
 const router = useRouter()
 const boardForm = ref({

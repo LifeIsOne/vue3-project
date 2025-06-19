@@ -23,7 +23,7 @@
 import { getBoardById, updateBoard } from '@/api/boards'
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import BoardForm from '@/components/BoardForm.vue'
+import BoardForm from '@/components/boards/BoardForm.vue'
 
 const route = useRoute()
 const router = useRouter()
