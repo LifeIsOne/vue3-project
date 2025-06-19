@@ -24,6 +24,7 @@ import { getBoardById, updateBoard } from '@/api/boards'
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import BoardForm from '@/components/boards/BoardForm.vue'
+import { useAlert } from '@/composables/alert'
 
 const route = useRoute()
 const router = useRouter()
@@ -53,7 +54,7 @@ const editBoard = async () => {
   try {
     await updateBoard(boardId, { ...boardForm.value })
     // router.push({ name: 'BoardDetail', params: { boardId } })
-    vAlert('Edit complete!', 'success')
+    vSuccess('Edit complete!')
   } catch (err) {
     console.error(err)
     vAlert(err.message)
@@ -64,22 +65,8 @@ const boardDetailPage = () => {
   router.push(`/boards/${route.params.id}`)
 }
 
-// Alert
-// const showAlert = ref(false)
-// const alertMsg = ref('')
-// const alertType = ref('error')
-const alerts = ref([])
-
-const vAlert = (msg, type) => {
-  // showAlert.value = true
-  // alertMsg.value = msg
-  // alertType.value = type
-  alerts.value.push({ msg, type })
-  setTimeout(() => {
-    // showAlert.value = false
-    alerts.value.shift()
-  }, 3000)
-}
+// 얼럿( Alert )
+const { alerts, vAlert, vSuccess } = useAlert()
 </script>
 
 <style lang="scss" scoped></style>

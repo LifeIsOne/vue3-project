@@ -65,6 +65,18 @@
       "content": "NEW Content",
       "createdAt": 1750151251876,
       "id": 11
+    },
+    {
+      "title": "Board Title",
+      "content": "Board Content",
+      "createdAt": 1750331722871,
+      "id": 12
+    },
+    {
+      "title": "0322",
+      "content": "1111",
+      "createdAt": 1750332835846,
+      "id": 13
     }
   ]
 }

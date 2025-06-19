@@ -12,6 +12,8 @@
         <button class="btn btn-success">Save</button>
       </template>
     </BoardForm>
+
+    <AppAlert :items="alerts" />
   </div>
 </template>
 
@@ -20,6 +22,7 @@ import { createBoard } from '@/api/boards'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import BoardForm from '@/components/boards/BoardForm.vue'
+import { useAlert } from '@/composables/alert'
 
 const router = useRouter()
 const boardForm = ref({
@@ -34,15 +37,20 @@ const saveBoard = async () => {
       createdAt: Date.now(),
       // createdAt: new Date().toLocaleString(),
     })
-    router.push({ name: 'BoardList' })
+    // router.push({ name: 'BoardList' })
+    vSuccess('Edit complete!')
   } catch (err) {
     console.error(err)
+    vAlert(err.message)
   }
 }
 
 const boardListPage = () => {
   router.push({ name: 'BoardList' })
 }
+
+// 얼럿( Alert )
+const { alerts, vAlert, vSuccess } = useAlert()
 </script>
 
 <style lang="scss" scoped></style>
