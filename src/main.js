@@ -3,14 +3,14 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-icons/font/bootstrap-icons'
 import 'bootstrap/dist/js/bootstrap.js'
 import router from './router'
+// import globalComponent from './plugins/global-component'
 // import focus from '@/directives/focus'
-import globalDirectives from './plugins/global-directives'
+import globalDirectives from '@//plugins/global-directives'
 
 import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
-// import globalComponent from './plugins/global-component'
 
 const app = createApp(App)
 app.use(router).mount('#app')
