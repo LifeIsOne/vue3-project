@@ -5,7 +5,7 @@
     <div class="bg-dark text-white p-3 mb-3 card">
       <h2>{{ board.title }}</h2>
       <p>{{ board.content }}</p>
-      <p class="text-secondary">{{ board.createdAt }}</p>
+      <p class="text-secondary">{{ $dayjs(board.createdAt).format('YYYY. MM. DD HH:mm:ss') }}</p>
     </div>
     <div class="row g-1">
       <div class="col-auto">

@@ -94,7 +94,7 @@ const boardDetailPage = (boardId) => {
   })
 }
 
-// Modal
+// 모달
 const show = ref(false) // 기본값
 const modalTitle = ref('')
 const modalContent = ref('')

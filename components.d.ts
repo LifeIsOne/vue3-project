@@ -17,6 +17,7 @@ declare module 'vue' {
     BoardFilter: typeof import('./src/components/BoardFilter.vue')['default']
     BoardForm: typeof import('./src/components/BoardForm.vue')['default']
     BoardItem: typeof import('./src/components/boards/BoardItem.vue')['default']
+    BoardModal: typeof import('./src/components/BoardModal.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

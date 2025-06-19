@@ -31,8 +31,8 @@ const saveBoard = async () => {
   try {
     await createBoard({
       ...boardForm.value,
-      // createdAt: Date.now(),
-      createdAt: new Date().toLocaleString(),
+      createdAt: Date.now(),
+      // createdAt: new Date().toLocaleString(),
     })
     router.push({ name: 'BoardList' })
   } catch (err) {
