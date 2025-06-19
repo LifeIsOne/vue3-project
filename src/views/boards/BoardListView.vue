@@ -30,7 +30,7 @@
       @page="(page) => (params._page = page)"
     />
 
-    <!-- Modal -->
+    <!-- 모달 -->
     <Teleport to="#modal">
       <BoardModal
         v-model="show"

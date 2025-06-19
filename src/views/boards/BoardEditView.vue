@@ -15,7 +15,6 @@
       </template>
     </BoardForm>
     <!-- <AppAlert :show="showAlert" :msg="alertMsg" :type="alertType" /> -->
-    <AppAlert :items="alerts" />
   </div>
 </template>
 
@@ -53,7 +52,7 @@ fetchBoard()
 const editBoard = async () => {
   try {
     await updateBoard(boardId, { ...boardForm.value })
-    // router.push({ name: 'BoardDetail', params: { boardId } })
+    router.push({ name: 'BoardDetail', params: { boardId } })
     vSuccess('Edit complete!')
   } catch (err) {
     console.error(err)
@@ -62,11 +61,16 @@ const editBoard = async () => {
 }
 
 const boardDetailPage = () => {
-  router.push(`/boards/${route.params.id}`)
+  router.push({
+    name: 'BoardDetail',
+    params: {
+      boardId,
+    },
+  })
 }
 
 // 얼럿( Alert )
-const { alerts, vAlert, vSuccess } = useAlert()
+const { vAlert, vSuccess } = useAlert()
 </script>
 
 <style lang="scss" scoped></style>

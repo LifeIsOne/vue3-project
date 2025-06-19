@@ -12,8 +12,6 @@
         <button class="btn btn-success">Save</button>
       </template>
     </BoardForm>
-
-    <AppAlert :items="alerts" />
   </div>
 </template>
 
@@ -37,7 +35,7 @@ const saveBoard = async () => {
       createdAt: Date.now(),
       // createdAt: new Date().toLocaleString(),
     })
-    // router.push({ name: 'BoardList' })
+    router.push({ name: 'BoardList' })
     vSuccess('Edit complete!')
   } catch (err) {
     console.error(err)
@@ -50,7 +48,7 @@ const boardListPage = () => {
 }
 
 // 얼럿( Alert )
-const { alerts, vAlert, vSuccess } = useAlert()
+const { vAlert, vSuccess } = useAlert()
 </script>
 
 <style lang="scss" scoped></style>

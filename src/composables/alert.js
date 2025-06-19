@@ -1,7 +1,8 @@
 import { ref } from 'vue'
 
+const alerts = ref([])
 export function useAlert() {
-  const alerts = ref([])
+  // const alerts = ref([])
 
   const vAlert = (msg, type) => {
     alerts.value.push({ msg, type })
