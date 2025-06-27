@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <AppLoading v-if="loading" />
+
+  <AppError v-else-if="error" :msg="error.message" />
+
+  <div v-else>
     <h1>Board Detail</h1>
     <hr class="my-3" />
     <div class="bg-dark text-white p-3 mb-3 card">
@@ -44,13 +48,19 @@ const route = useRoute()
 const boardId = route.params.boardId
 const board = ref({})
 
+const error = ref(null)
+const loading = ref(false)
+
 const fetchBoard = async () => {
   try {
+    loading.value = true
     const { data } = await getBoardById(props.boardId)
     setBoard(data)
     // board.value = { ...data } 어떤 데이터가 올 지 알지 못하기 때문에
   } catch (err) {
-    console.error(err)
+    error.value = err
+  } finally {
+    loading.value = false
   }
 }
 const setBoard = ({ title, content, createdAt }) => {

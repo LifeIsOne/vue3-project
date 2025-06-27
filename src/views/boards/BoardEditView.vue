@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <AppLoading v-if="loading" />
+
+  <AppError v-else-if="error" :msg="error.message" />
+
+  <div v-else>
     <h1>Board Edit</h1>
     <hr />
     <BoardForm
@@ -33,14 +37,21 @@ const boardForm = ref({
   content: null,
 })
 
+const error = ref(null)
+const loading = ref(false)
+
 // 1. 조회
 const fetchBoard = async () => {
   try {
+    loading.value = true
     const { data } = await getBoardById(boardId)
     setBoardForm(data)
   } catch (err) {
-    console.error(err)
-    vAlert(err.message)
+    // console.error(err)
+    // vAlert(err.message)
+    error.value = err
+  } finally {
+    loading.value = false
   }
 }
 const setBoardForm = ({ title, content }) => {

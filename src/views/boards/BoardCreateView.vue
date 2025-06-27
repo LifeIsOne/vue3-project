@@ -10,6 +10,14 @@
       <template #actions>
         <button type="button" class="btn btn-outline-secondary" @click="boardListPage">List</button>
         <button class="btn btn-success">Save</button>
+
+        <button class="btn btn-primary" type="button" :disabled="loading">
+          <template v-if="loading">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+          </template>
+          <template v-else="loading">저장</template>
+        </button>
       </template>
     </BoardForm>
   </div>
@@ -27,6 +35,8 @@ const boardForm = ref({
   title: null,
   content: null,
 })
+
+const loading = ref(false)
 
 const saveBoard = async () => {
   try {

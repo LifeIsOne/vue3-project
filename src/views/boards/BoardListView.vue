@@ -6,29 +6,37 @@
     <BoardFilter v-model:title="params.title_like" v-model:limit="params._limit" />
 
     <hr class="my-3" />
-    <!-- Board item -->
-    <AppGrid :items="boards">
-      <template v-slot="{ item }">
-        <BoardItem
-          :title="item.title"
-          :content="item.content"
-          :created-at="item.createdAt"
-          @click="boardDetailPage(item.id)"
-          @modal="openModal(item)"
-        />
-      </template>
-    </AppGrid>
-    <div class="row g-1">
-      <div v-for="board in boards" :key="board.id" class="col-4">
-        <!-- prettier-ignore -->
+
+    <AppLoading v-if="loading" />
+
+    <AppError v-else-if="error" :msg="error.message" />
+
+    <!-- 게시물 items -->
+    <template v-else>
+      <AppGrid :items="boards">
+        <template v-slot="{ item }">
+          <BoardItem
+            :title="item.title"
+            :content="item.content"
+            :created-at="item.createdAt"
+            @click="boardDetailPage(item.id)"
+            @modal="openModal(item)"
+          />
+        </template>
+      </AppGrid>
+      <div class="row g-1">
+        <div v-for="board in boards" :key="board.id" class="col-4">
+          <!-- prettier-ignore -->
+        </div>
       </div>
-    </div>
-    <!-- 페이징 -->
-    <AppPagination
-      :current-page="params._page"
-      :page-count="pageCount"
-      @page="(page) => (params._page = page)"
-    />
+      <!-- 페이징 -->
+      <AppPagination
+        :current-page="params._page"
+        :page-count="pageCount"
+        @page="(page) => (params._page = page)"
+      />
+    </template>
+    <!-- 게시물 items 끝 -->
 
     <!-- 모달 -->
     <Teleport to="#modal">
@@ -60,6 +68,8 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const boards = ref({})
+const error = ref(null)
+const loading = ref(false)
 
 const params = ref({
   _sort: 'createdAt',
@@ -73,11 +83,14 @@ const pageCount = computed(() => Math.ceil(totalBoardCount.value / params.value.
 
 const fetchBoards = async () => {
   try {
+    loading.value = true
     const { data, headers } = await getBoards(params.value)
     boards.value = data
     totalBoardCount.value = headers['x-total-count']
   } catch (err) {
-    console.error(err)
+    error.value = err
+  } finally {
+    loading.value = false
   }
 }
 // fetchBoards()
