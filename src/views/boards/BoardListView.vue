@@ -68,6 +68,7 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const boards = ref({})
+// 로딩과 에러 상태
 const error = ref(null)
 const loading = ref(false)
 

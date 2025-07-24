@@ -9,5 +9,3 @@ defineProps({
   msg: String,
 })
 </script>
-
-<style scoped></style>
