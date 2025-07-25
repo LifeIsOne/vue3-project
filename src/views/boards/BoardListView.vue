@@ -69,8 +69,8 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const boards = ref({})
 // 로딩과 에러 상태
-const error = ref(null)
 const loading = ref(false)
+const error = ref(null)
 
 const params = ref({
   _sort: 'createdAt',
@@ -83,8 +83,8 @@ const totalBoardCount = ref(0)
 const pageCount = computed(() => Math.ceil(totalBoardCount.value / params.value._limit))
 
 const fetchBoards = async () => {
+  loading.value = true
   try {
-    loading.value = true
     const { data, headers } = await getBoards(params.value)
     boards.value = data
     totalBoardCount.value = headers['x-total-count']

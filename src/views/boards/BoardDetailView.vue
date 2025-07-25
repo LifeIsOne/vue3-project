@@ -9,28 +9,46 @@
     <div class="bg-dark text-white p-3 mb-3 card">
       <h2>{{ board.title }}</h2>
       <p>{{ board.content }}</p>
-      <p class="text-secondary">{{ $dayjs(board.createdAt).format('YYYY. MM. DD HH:mm:ss') }}</p>
+      <p class="text-secondary">
+        {{ $dayjs(board.createdAt).format('YYYY. MM. DD HH:mm:ss') }}
+      </p>
     </div>
+
+    <!-- todo: 수정해야할 듯 안나옴 -->
+    <AppError v-if="removeError" :msg="removeError.message" />
+    <!-- 버튼 시작 -->
     <div class="row g-1">
+      <!-- 이전  -->
       <div class="col-auto">
         <button class="btn btn-outline-secondary text-white">prev</button>
       </div>
+      <!-- 다음  -->
       <div class="col-auto">
         <button class="btn btn-outline-secondary text-white">next</button>
       </div>
       <div class="col-auto me-auto"></div>
+      <!-- 글 목록 -->
       <div class="col-auto">
         <button class="btn btn-outline-secondary text-white" @click="boardListPage">
           List Page
         </button>
       </div>
+      <!-- 수정 -->
       <div class="col-auto">
         <button class="btn btn-outline-success" @click="boardEditPage">Edit</button>
       </div>
+      <!-- 삭제 -->
       <div class="col-auto">
-        <button class="btn btn-outline-danger" @click="removeBoard">Delete</button>
+        <button class="btn btn-outline-danger" @click="removeBoard" :disabled="removeLoading">
+          <template v-if="removeLoading">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+          </template>
+          <template v-else>Delete</template>
+        </button>
       </div>
     </div>
+    <!-- 버튼 종료 -->
   </div>
 </template>
 
@@ -48,8 +66,9 @@ const route = useRoute()
 const boardId = route.params.boardId
 const board = ref({})
 
-const error = ref(null)
+// 로딩•에러 상태
 const loading = ref(false)
+const error = ref(null)
 
 const fetchBoard = async () => {
   try {
@@ -71,15 +90,23 @@ const setBoard = ({ title, content, createdAt }) => {
 }
 fetchBoard()
 
+// 삭제 로딩•에러 상태
+const removeLoading = ref(false)
+const removeError = ref(null)
+
 const removeBoard = async () => {
   try {
     if (confirm('Confirm delete?') === false) {
       return
     }
+    removeLoading.value = true
     await deleteBoard(props.boardId)
     router.push({ name: 'BoardList' })
   } catch (err) {
-    console.error(err)
+    vAlert(err.message)
+    removeError.value = err
+  } finally {
+    removeLoading.value = false
   }
 }
 

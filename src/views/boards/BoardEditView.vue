@@ -6,6 +6,8 @@
   <div v-else>
     <h1>Board Edit</h1>
     <hr />
+    <AppError v-if="editError" :msg="editError.message" />
+
     <BoardForm
       @submit.prevent="editBoard"
       v-model:title="boardForm.title"
@@ -15,7 +17,13 @@
         <button type="button" class="btn btn-outline-danger" @click="boardDetailPage">
           Cancel
         </button>
-        <button class="btn btn-outline-success">Save</button>
+        <button class="btn btn-success" :disabled="editLoading">
+          <template v-if="editLoading">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+          </template>
+          <template v-else>Edit</template>
+        </button>
       </template>
     </BoardForm>
     <!-- <AppAlert :show="showAlert" :msg="alertMsg" :type="alertType" /> -->
@@ -36,11 +44,11 @@ const boardForm = ref({
   title: null,
   content: null,
 })
-
-const error = ref(null)
+// 로딩, 에러 상태
 const loading = ref(false)
+const error = ref(null)
 
-// 1. 조회
+// 조회
 const fetchBoard = async () => {
   try {
     loading.value = true
@@ -60,14 +68,21 @@ const setBoardForm = ({ title, content }) => {
 }
 fetchBoard()
 
+// 수정 로딩, 에러 상태
+const editLoading = ref(false)
+const editError = ref(null)
+
 const editBoard = async () => {
+  editLoading.value = true
   try {
     await updateBoard(boardId, { ...boardForm.value })
     router.push({ name: 'BoardDetail', params: { boardId } })
     vSuccess('Edit complete!')
   } catch (err) {
-    console.error(err)
     vAlert(err.message)
+    editError.value = err
+  } finally {
+    editLoading.value = false
   }
 }
 
