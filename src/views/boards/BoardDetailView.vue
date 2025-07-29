@@ -41,9 +41,10 @@
       <div class="col-auto">
         <button class="btn btn-outline-danger" @click="removeBoard" :disabled="removeLoading">
           <template v-if="removeLoading">
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Loading...
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            <span class="visually-hidden">Loading...</span>
           </template>
+
           <template v-else>Delete</template>
         </button>
       </div>
@@ -91,8 +92,8 @@ const setBoard = ({ title, content, createdAt }) => {
 fetchBoard()
 
 // 삭제 로딩•에러 상태
-const removeLoading = ref(false)
 const removeError = ref(null)
+const removeLoading = ref(false)
 
 const removeBoard = async () => {
   try {
@@ -109,6 +110,18 @@ const removeBoard = async () => {
     removeLoading.value = false
   }
 }
+// const removeBoard = async () => {
+//   removeLoading.value = true
+//   try {
+//     await deleteBoard(props.boardId)
+//     router.push({ name: 'BoardList' })
+//   } catch (err) {
+//     vAlert(err.message)
+//     removeError.value = err
+//   } finally {
+//     removeLoading.value = false
+//   }
+// }
 
 const boardListPage = () => {
   router.push({ name: 'BoardList' })
