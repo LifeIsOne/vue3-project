@@ -2,7 +2,6 @@
   <AppLoading v-if="loading" />
 
   <AppError v-else-if="error" :msg="error.message" />
-
   <div v-else>
     <h1>Board Detail</h1>
     <hr class="my-3" />
@@ -104,7 +103,7 @@ const removeBoard = async () => {
     await deleteBoard(props.boardId)
     router.push({ name: 'BoardList' })
   } catch (err) {
-    vAlert(err.message)
+    // vAlert(err.message)
     removeError.value = err
   } finally {
     removeLoading.value = false

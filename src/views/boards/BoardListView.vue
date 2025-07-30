@@ -13,7 +13,7 @@
 
     <!-- 게시물 items -->
     <template v-else>
-      <AppGrid :items="boards">
+      <AppItemGrid :items="boards">
         <template v-slot="{ item }">
           <BoardItem
             :title="item.title"
@@ -23,7 +23,7 @@
             @modal="openModal(item)"
           />
         </template>
-      </AppGrid>
+      </AppItemGrid>
       <div class="row g-1">
         <div v-for="board in boards" :key="board.id" class="col-4">
           <!-- prettier-ignore -->
@@ -59,8 +59,6 @@
 import BoardItem from '@/components/boards/BoardItem.vue'
 import BoardDetailView from '@/views/boards/BoardDetailView.vue'
 import BoardModal from '@/components/boards/BoardModal.vue'
-import AppPagination from '@/components/app/AppPagination.vue'
-import AppGrid from '@/components/app/AppItemGrid.vue'
 import BoardFilter from '@/components/boards/BoardFilter.vue'
 import { computed, ref, watchEffect } from 'vue'
 import { getBoards } from '@/api/boards'
