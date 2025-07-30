@@ -31,6 +31,9 @@ import { useRouter } from 'vue-router'
 import BoardForm from '@/components/boards/BoardForm.vue'
 import { useAlert } from '@/composables/alert'
 
+// 얼럿( Alert )
+const { vAlert, vSuccess } = useAlert()
+
 const router = useRouter()
 const boardForm = ref({
   title: null,
@@ -61,9 +64,6 @@ const saveBoard = async () => {
 const boardListPage = () => {
   router.push({ name: 'BoardList' })
 }
-
-// 얼럿( Alert )
-const { vAlert, vSuccess } = useAlert()
 </script>
 
 <style lang="scss" scoped></style>

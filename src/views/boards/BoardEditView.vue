@@ -37,6 +37,9 @@ import { useRoute, useRouter } from 'vue-router'
 import BoardForm from '@/components/boards/BoardForm.vue'
 import { useAlert } from '@/composables/alert'
 
+// 얼럿( Alert )
+const { vAlert, vSuccess } = useAlert()
+
 const route = useRoute()
 const router = useRouter()
 const boardId = route.params.boardId
@@ -56,7 +59,7 @@ const fetchBoard = async () => {
     setBoardForm(data)
   } catch (err) {
     // console.error(err)
-    // vAlert(err.message)
+    vAlert(err.message)
     error.value = err
   } finally {
     loading.value = false
@@ -94,9 +97,6 @@ const boardDetailPage = () => {
     },
   })
 }
-
-// 얼럿( Alert )
-const { vAlert, vSuccess } = useAlert()
 </script>
 
 <style lang="scss" scoped></style>

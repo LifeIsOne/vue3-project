@@ -56,6 +56,10 @@
 import { useRoute, useRouter } from 'vue-router'
 import { deleteBoard, getBoardById } from '@/api/boards'
 import { ref } from 'vue'
+import { useAlert } from '@/composables/alert'
+
+// 얼럿
+const { vAlert, vSuccess } = useAlert()
 
 const props = defineProps({
   boardId: String,
@@ -64,15 +68,19 @@ const props = defineProps({
 const router = useRouter()
 const route = useRoute()
 const boardId = route.params.boardId
-const board = ref({})
+const board = ref({
+  title: null,
+  content: null,
+  createdAt: null,
+})
 
 // 로딩•에러 상태
 const loading = ref(false)
 const error = ref(null)
 
 const fetchBoard = async () => {
+  loading.value = true
   try {
-    loading.value = true
     const { data } = await getBoardById(props.boardId)
     setBoard(data)
     // board.value = { ...data } 어떤 데이터가 올 지 알지 못하기 때문에
@@ -91,8 +99,8 @@ const setBoard = ({ title, content, createdAt }) => {
 fetchBoard()
 
 // 삭제 로딩•에러 상태
-const removeError = ref(null)
 const removeLoading = ref(false)
+const removeError = ref(null)
 
 const removeBoard = async () => {
   try {
@@ -102,8 +110,9 @@ const removeBoard = async () => {
     removeLoading.value = true
     await deleteBoard(props.boardId)
     router.push({ name: 'BoardList' })
+    vSuccess('Delete complete!')
   } catch (err) {
-    // vAlert(err.message)
+    vAlert(err.message)
     removeError.value = err
   } finally {
     removeLoading.value = false

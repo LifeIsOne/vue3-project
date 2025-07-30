@@ -4,7 +4,7 @@ const alerts = ref([])
 export function useAlert() {
   // const alerts = ref([])
 
-  const vAlert = (msg, type) => {
+  const vAlert = (msg, type = 'error') => {
     alerts.value.push({ msg, type })
     setTimeout(() => {
       alerts.value.shift()
