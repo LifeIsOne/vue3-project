@@ -60,15 +60,12 @@ import BoardItem from '@/components/boards/BoardItem.vue'
 import BoardDetailView from '@/views/boards/BoardDetailView.vue'
 import BoardModal from '@/components/boards/BoardModal.vue'
 import BoardFilter from '@/components/boards/BoardFilter.vue'
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref } from 'vue'
 import { getBoards } from '@/api/boards'
 import { useRouter } from 'vue-router'
+import { useAxios } from '@/hook/useAxios'
 
 const router = useRouter()
-const boards = ref({})
-// 로딩과 에러 상태
-const loading = ref(false)
-const error = ref(null)
 
 const params = ref({
   _sort: 'createdAt',
@@ -77,24 +74,11 @@ const params = ref({
   _limit: 3,
   title_like: '',
 })
-const totalBoardCount = ref(0)
+const { response, data: boards, loading, error } = useAxios('/boards', { method: 'get', params })
+
+// 페이지네이션
+const totalBoardCount = computed(() => response.value.headers['x-total-count'])
 const pageCount = computed(() => Math.ceil(totalBoardCount.value / params.value._limit))
-
-const fetchBoards = async () => {
-  loading.value = true
-  try {
-    const { data, headers } = await getBoards(params.value)
-    boards.value = data
-    totalBoardCount.value = headers['x-total-count']
-  } catch (err) {
-    error.value = err
-  } finally {
-    loading.value = false
-  }
-}
-// fetchBoards()
-
-watchEffect(fetchBoards)
 
 const boardDetailPage = (boardId) => {
   // router.push(`boards/${id}`)

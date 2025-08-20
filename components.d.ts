@@ -16,6 +16,7 @@ declare module 'vue' {
     AppLoading: typeof import('./src/components/app/AppLoading.vue')['default']
     AppModal: typeof import('./src/components/app/AppModal.vue')['default']
     AppPagination: typeof import('./src/components/app/AppPagination.vue')['default']
+    Ass: typeof import('./src/components/app/ass.vue')['default']
     BoardFilter: typeof import('./src/components/boards/BoardFilter.vue')['default']
     BoardForm: typeof import('./src/components/boards/BoardForm.vue')['default']
     BoardItem: typeof import('./src/components/boards/BoardItem.vue')['default']
