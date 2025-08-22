@@ -6,34 +6,48 @@ axios.defaults.baseURL = import.meta.env.VITE_APP_API_URL
 const defaultConfig = {
   method: 'get',
 }
+const defaultOptions = {
+  immediate: true,
+}
 
-export const useAxios = (url, config = {}) => {
+export const useAxios = (url, config = {}, options = {}) => {
   const response = ref(null)
   const data = ref(null)
   const loading = ref(false)
   const error = ref(null)
 
+  const { onSuccess, onError, immediate } = {
+    ...defaultOptions,
+    ...options,
+  }
+
   console.log('🫥 : ', config.paramas)
 
   const { params } = config
 
-  loading.value = true
-
-  const execute = () => {
+  const execute = (body) => {
     data.value = null
     error.value = null
+    loading.value = true
 
     axios(url, {
       ...defaultConfig,
       ...config,
       params: unref(params),
+      data: typeof body === 'object' ? body : {},
     })
       .then((res) => {
         response.value = res
         data.value = res.data
+        if (onSuccess) {
+          onSuccess(res)
+        }
       })
       .catch((err) => {
         error.value = err
+        if (onError) {
+          onError(res)
+        }
       })
       .finally(() => {
         loading.value = false
@@ -43,8 +57,10 @@ export const useAxios = (url, config = {}) => {
   if (isRef(params)) {
     watchEffect(execute)
   } else {
-    execute()
+    if (immediate) {
+      execute()
+    }
   }
 
-  return { response, data, loading, error }
+  return { response, data, loading, error, execute }
 }

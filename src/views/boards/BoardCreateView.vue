@@ -30,6 +30,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import BoardForm from '@/components/boards/BoardForm.vue'
 import { useAlert } from '@/composables/alert'
+import { useAxios } from '@/hook/useAxios'
 
 // 얼럿( Alert )
 const { vAlert, vSuccess } = useAlert()
@@ -39,27 +40,47 @@ const boardForm = ref({
   title: null,
   content: null,
 })
-// 로딩 상태
-const loading = ref(false)
-const error = ref(null)
+
+const { loading, error, execute } = useAxios(
+  '/boards',
+  {
+    method: 'post',
+  },
+  {
+    immediate: false,
+    onSuccess: () => {
+      router.push({ name: 'BoardList' })
+      vSuccess('Edit complete!')
+    },
+    onError: (err) => {
+      vAlert(err.message)
+    },
+  },
+)
 
 const saveBoard = async () => {
-  loading.value = true
-  try {
-    await createBoard({
-      ...boardForm.value,
-      createdAt: Date.now(),
-      // createdAt: new Date().toLocaleString(),
-    })
-    router.push({ name: 'BoardList' })
-    vSuccess('Edit complete!')
-  } catch (err) {
-    vAlert(err.message)
-    error.value = err
-  } finally {
-    loading.value = false
-  }
+  execute({ ...boardForm.value, createdAt: Date.now() })
 }
+
+// const saveBoard = async () => {}
+
+// const saveBoard = async () => {
+//   loading.value = true
+//   try {
+//     await createBoard({
+//       ...boardForm.value,
+//       createdAt: Date.now(),
+//       // createdAt: new Date().toLocaleString(),
+//     })
+//     router.push({ name: 'BoardList' })
+//     vSuccess('Edit complete!')
+//   } catch (err) {
+//     vAlert(err.message)
+//     error.value = err
+//   } finally {
+//     loading.value = false
+//   }
+// }
 
 const boardListPage = () => {
   router.push({ name: 'BoardList' })
