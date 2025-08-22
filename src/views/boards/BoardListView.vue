@@ -61,7 +61,6 @@ import BoardDetailView from '@/views/boards/BoardDetailView.vue'
 import BoardModal from '@/components/boards/BoardModal.vue'
 import BoardFilter from '@/components/boards/BoardFilter.vue'
 import { computed, ref } from 'vue'
-import { getBoards } from '@/api/boards'
 import { useRouter } from 'vue-router'
 import { useAxios } from '@/hook/useAxios'
 

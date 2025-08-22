@@ -36,6 +36,7 @@ import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import BoardForm from '@/components/boards/BoardForm.vue'
 import { useAlert } from '@/composables/alert'
+import { useAxios } from '@/hook/useAxios'
 
 // 얼럿( Alert )
 const { vAlert, vSuccess } = useAlert()
@@ -43,13 +44,8 @@ const { vAlert, vSuccess } = useAlert()
 const route = useRoute()
 const router = useRouter()
 const boardId = route.params.boardId
-const boardForm = ref({
-  title: null,
-  content: null,
-})
-// 로딩, 에러 상태
-const loading = ref(false)
-const error = ref(null)
+
+const { data: boardForm, loading, error } = useAxios('/boards/' + boardId)
 
 // 조회
 const fetchBoard = async () => {

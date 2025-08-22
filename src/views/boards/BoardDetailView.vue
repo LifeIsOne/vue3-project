@@ -54,9 +54,10 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { deleteBoard, getBoardById } from '@/api/boards'
+import { deleteBoard } from '@/api/boards'
 import { ref } from 'vue'
 import { useAlert } from '@/composables/alert'
+import { useAxios } from '@/hook/useAxios'
 
 // 얼럿
 const { vAlert, vSuccess } = useAlert()
@@ -68,35 +69,15 @@ const props = defineProps({
 const router = useRouter()
 const route = useRoute()
 const boardId = route.params.boardId
-const board = ref({
-  title: null,
-  content: null,
-  createdAt: null,
-})
 
-// 로딩•에러 상태
-const loading = ref(false)
-const error = ref(null)
+const { data: board, loading, error } = useAxios('/boards/' + props.boardId)
 
-const fetchBoard = async () => {
-  loading.value = true
-  try {
-    const { data } = await getBoardById(props.boardId)
-    setBoard(data)
-    // board.value = { ...data } 어떤 데이터가 올 지 알지 못하기 때문에
-  } catch (err) {
-    error.value = err
-  } finally {
-    loading.value = false
-  }
-}
 const setBoard = ({ title, content, createdAt }) => {
   // 원하는 데이터만 구조 분해 할당으로 파라메터로 선언
   board.value.title = title
   board.value.content = content
   board.value.createdAt = createdAt
 }
-fetchBoard()
 
 // 삭제 로딩•에러 상태
 const removeLoading = ref(false)
