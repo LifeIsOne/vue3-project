@@ -45,44 +45,33 @@ const route = useRoute()
 const router = useRouter()
 const boardId = route.params.boardId
 
+// 조회
 const { data: boardForm, loading, error } = useAxios('/boards/' + boardId)
 
-// 조회
-const fetchBoard = async () => {
-  try {
-    loading.value = true
-    const { data } = await getBoardById(boardId)
-    setBoardForm(data)
-  } catch (err) {
-    // console.error(err)
-    vAlert(err.message)
-    error.value = err
-  } finally {
-    loading.value = false
-  }
-}
-const setBoardForm = ({ title, content }) => {
-  boardForm.value.title = title
-  boardForm.value.content = content
-}
-fetchBoard()
-
 // 수정 로딩, 에러 상태
-const editLoading = ref(false)
-const editError = ref(null)
+const {
+  loading: editLoading,
+  error: leditError,
+  execute,
+} = useAxios(
+  '/boards/' + boardId,
+  { method: 'patch' },
+  {
+    immediate: false,
+    onSuccess: () => {
+      router.push({ name: 'BoardDetail', params: { boardId } })
+      vSuccess('Edit complete!')
+    },
+    onError: (err) => {
+      vAlert(err.message)
+    },
+  },
+)
 
-const editBoard = async () => {
-  editLoading.value = true
-  try {
-    await updateBoard(boardId, { ...boardForm.value })
-    router.push({ name: 'BoardDetail', params: { boardId } })
-    vSuccess('Edit complete!')
-  } catch (err) {
-    vAlert(err.message)
-    editError.value = err
-  } finally {
-    editLoading.value = false
-  }
+const editBoard = () => {
+  execute({
+    ...boardForm.value,
+  })
 }
 
 const boardDetailPage = () => {

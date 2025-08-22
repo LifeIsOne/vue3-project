@@ -7,7 +7,7 @@
     <hr class="my-3" />
     <div class="bg-dark text-white p-3 mb-3 card">
       <h2>{{ board.title }}</h2>
-      <p>{{ board.content }}</p>
+      <p class="content">{{ board.content }}</p>
       <p class="text-secondary">
         {{ $dayjs(board.createdAt).format('YYYY. MM. DD HH:mm:ss') }}
       </p>
@@ -80,24 +80,31 @@ const setBoard = ({ title, content, createdAt }) => {
 }
 
 // 삭제 로딩•에러 상태
-const removeLoading = ref(false)
-const removeError = ref(null)
+
+const {
+  loading: removeLoading,
+  error: removeError,
+  execute,
+} = useAxios(
+  '/boards/' + boardId,
+  { method: 'delete' },
+  {
+    immediate: false,
+    onSuccess: () => {
+      router.push({ name: 'BoardList' })
+      vSuccess('De lete complete!')
+    },
+    onError: (err) => {
+      vAlert(err.message)
+    },
+  },
+)
 
 const removeBoard = async () => {
-  try {
-    if (confirm('Confirm delete?') === false) {
-      return
-    }
-    removeLoading.value = true
-    await deleteBoard(props.boardId)
-    router.push({ name: 'BoardList' })
-    vSuccess('Delete complete!')
-  } catch (err) {
-    vAlert(err.message)
-    removeError.value = err
-  } finally {
-    removeLoading.value = false
+  if (confirm('Confirm delete?') === false) {
+    return
   }
+  execute()
 }
 // const removeBoard = async () => {
 //   removeLoading.value = true
