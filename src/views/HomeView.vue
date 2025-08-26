@@ -5,9 +5,15 @@
     <p>{{ $route.name }}</p>
     <button @click="goAboutView" class="btn btn-primary">About Button</button>
     <hr />
-    <AppGrid :items="items" v-slot="{ item }" col-class="col-3">
+    <AppItemGrid :items="items" v-slot="{ item }" col-class="col-3">
       <AppCard>{{ item }}</AppCard>
-    </AppGrid>
+    </AppItemGrid>
+    <hr />
+    <!-- <h2>{{ $person.name }}</h2>
+    <button class="btn btn-primary" @click="person.say">Click Person</button> -->
+    <h1>{{ position }}</h1>
+    <h1>x는 {{ x }}</h1>
+    <h1>y는 {{ y }}</h1>
   </div>
 </template>
 
@@ -22,7 +28,7 @@ export default {
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { inject, reactive, ref, toRef, toRefs } from 'vue'
 
 const router = useRouter()
 const goAboutView = () => {
@@ -31,6 +37,23 @@ const goAboutView = () => {
 
 // AppGrid 더미
 const items = ref(['Alpha', 'Bravo', 'Charile', 'Delta'])
-</script>
 
-<style lang="scss" scoped></style>
+// const person = inject('person')
+// console.log('person.name: ', person.name)
+
+const position = reactive({
+  x: 100,
+  y: 1000,
+})
+
+// const { x, y } = position
+// const x = ref(position.x)
+// const y = ref(position.y)
+// console.log('x: ', typeof x.value)
+// console.log('y: ', typeof y.value)
+
+// const x = toRef(position, 'x')
+// const y = toRef(position, 'y')
+
+const { x, y } = toRefs(position)
+</script>
