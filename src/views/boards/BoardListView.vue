@@ -21,6 +21,7 @@
             :created-at="item.createdAt"
             @click="boardDetailPage(item.id)"
             @modal="openModal(item)"
+            @preview="selectPreview(item.id)"
           />
         </template>
       </AppItemGrid>
@@ -49,9 +50,11 @@
     </Teleport>
 
     <hr class="my-5" />
-    <AppCard>
-      <BoardDetailView :boardId="'1'" />
-    </AppCard>
+    <template v-if="previewId">
+      <AppCard>
+        <BoardDetailView :boardId="previewId" />
+      </AppCard>
+    </template>
   </div>
 </template>
 
@@ -65,6 +68,9 @@ import { useRouter } from 'vue-router'
 import { useAxios } from '@/hook/useAxios'
 
 const router = useRouter()
+
+const previewId = ref(null)
+const selectPreview = (id) => (previewId.value = id)
 
 const params = ref({
   _sort: 'createdAt',

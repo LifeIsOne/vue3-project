@@ -10,6 +10,9 @@
         <button class="btn p-0 text-white" @click.stop="$emit('modal')">
           <i class="bi bi-search p-2"></i>
         </button>
+        <button class="btn p-0 text-white" @click.stop="$emit('preview')">
+          <i class="bi bi-plus-square p-2"></i>
+        </button>
       </div>
     </template>
   </AppCard>
@@ -31,7 +34,7 @@ const props = defineProps({
   },
 })
 
-defineEmits(['modal'])
+defineEmits(['modal', 'preview'])
 
 // dayjs 적용 - 날짜 포맷터
 const dayjs = inject('dayjs')

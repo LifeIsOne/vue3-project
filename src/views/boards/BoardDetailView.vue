@@ -4,6 +4,7 @@
   <AppError v-else-if="error" :msg="error.message" />
   <div v-else>
     <h1>Board Detail</h1>
+    <p>id: {{ props.boardId }}, isOdd: {{ isOdd }}</p>
     <hr class="my-3" />
     <div class="bg-dark text-white p-3 mb-3 card">
       <h2>{{ board.title }}</h2>
@@ -54,10 +55,10 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { deleteBoard } from '@/api/boards'
-import { ref } from 'vue'
+import { computed, ref, toRef, toRefs } from 'vue'
 import { useAlert } from '@/composables/alert'
 import { useAxios } from '@/hook/useAxios'
+import { useNumber } from '@/composables/number'
 
 // 얼럿
 const { vAlert, vSuccess } = useAlert()
@@ -67,10 +68,13 @@ const props = defineProps({
 })
 
 const router = useRouter()
+// const boardIdRef = toRef(props, 'boardId')
+const { boardId: boardIdRef } = toRefs(props)
+const { isOdd } = useNumber(boardIdRef)
 const route = useRoute()
 const boardId = route.params.boardId
-
-const { data: board, loading, error } = useAxios('/boards/' + props.boardId)
+const url = computed(() => '/boards/' + props.boardId)
+const { data: board, loading, error } = useAxios(url)
 
 const setBoard = ({ title, content, createdAt }) => {
   // 원하는 데이터만 구조 분해 할당으로 파라메터로 선언
