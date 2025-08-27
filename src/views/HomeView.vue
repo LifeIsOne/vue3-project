@@ -29,6 +29,8 @@ export default {
 <script setup>
 import { useRouter } from 'vue-router'
 import { inject, reactive, ref, toRef, toRefs } from 'vue'
+// import { useCounterStore } from '@/store/counter'
+// import { storeToRefs } from 'pinia'
 
 const router = useRouter()
 const goAboutView = () => {
@@ -56,4 +58,8 @@ const position = reactive({
 // const y = toRef(position, 'y')
 
 const { x, y } = toRefs(position)
+
+const store = useCounterStore()
+const { counter } = storeToRefs(store)
+counter.value = 200
 </script>
