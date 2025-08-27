@@ -1,14 +1,8 @@
 <template>
-  <!-- <Transition name="slide">
-    <div v-if="show" class="app-alert alert" :class="styleClass" role="alert">
-      <i :class="iconClass"></i>
-      {{ msg }}
-    </div>
-  </Transition> -->
   <div class="app-alert">
     <TransitionGroup name="slide">
       <div
-        v-for="({ msg, type }, index) in items"
+        v-for="({ msg, type }, index) in alerts"
         :key="index"
         class="alert"
         :class="styleClass(type)"
@@ -22,26 +16,13 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { useAlert } from '@/composables/alert'
+
+const { alerts } = useAlert()
 
 defineProps({
   items: Array,
 })
-// const props = defineProps({
-//   show: {
-//     type: Boolean,
-//     default: false,
-//   },
-//   msg: {
-//     type: String,
-//     required: true,
-//   },
-//   type: {
-//     type: String,
-//     default: 'error',
-//     validator: (value) => ['success', 'error'].includes(value),
-//   },
-// })
 
 const styleClass = (type) =>
   type === 'success' ? 'alert-success text-success' : 'alert-danger text-danger'

@@ -11,7 +11,7 @@ import App from './App.vue'
 import { createPinia } from 'pinia'
 
 const app = createApp(App)
-app.use(router).mount('#app')
 app.use(globalDirectives)
 app.use(dayjs)
 app.use(createPinia())
+app.use(router).mount('#app')
