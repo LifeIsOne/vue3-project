@@ -59,7 +59,7 @@ const position = reactive({
 
 const { x, y } = toRefs(position)
 
-const store = useCounterStore()
-const { counter } = storeToRefs(store)
-counter.value = 200
+// const store = useCounterStore()
+// const { counter } = storeToRefs(store)
+// counter.value = 200
 </script>

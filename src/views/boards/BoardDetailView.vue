@@ -20,11 +20,21 @@
     <div class="row g-1">
       <!-- 이전  -->
       <div class="col-auto">
-        <button class="btn btn-outline-secondary text-white">prev</button>
+        <button
+          class="btn btn-outline-secondary text-white"
+          @click="$router.push('/boards/' + (Number(boardId) - 1))"
+        >
+          prev
+        </button>
       </div>
       <!-- 다음  -->
       <div class="col-auto">
-        <button class="btn btn-outline-secondary text-white">next</button>
+        <button
+          class="btn btn-outline-secondary text-white"
+          @click="$router.push('/boards/' + (Number(boardId) + 1))"
+        >
+          next
+        </button>
       </div>
       <div class="col-auto me-auto"></div>
       <!-- 글 목록 -->
@@ -54,7 +64,7 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
+import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
 import { computed, ref, toRef, toRefs } from 'vue'
 import { useAlert } from '@/composables/alert'
 import { useAxios } from '@/hook/useAxios'
@@ -128,6 +138,21 @@ const boardListPage = () => {
 }
 const boardEditPage = () => {
   router.push({ name: 'BoardEdit', params: { boardId: props.boardId } })
+}
+
+onBeforeRouteUpdate(() => {
+  console.log('🆙 페이지 갱신 \n onBeforeRouteUpdate')
+})
+
+onBeforeRouteLeave(() => {
+  console.log('🍂 페이지 이탈 \n onBeforeRouteLeave')
+})
+</script>
+<script>
+export default {
+  beforeRouteEnter() {
+    console.log('📥 페이지 진입 \n beforeRouteEnter')
+  },
 }
 </script>
 

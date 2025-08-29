@@ -10,7 +10,9 @@ import NestedView from '@/views/nested/NestedView.vue'
 import NestedHomeView from '@/views/nested/NestedHomeView.vue'
 import NestedOneView from '@/views/nested/NestedOneView.vue'
 import NestedTwoView from '@/views/nested/NestedTwoView.vue'
+// import { name } from '@vue/eslint-config-prettier/skip-formatting'
 // import LoginView from '@/views/boards/'
+import MyPageView from '@/views/MyPageView.vue'
 
 const routes = [
   {
@@ -79,12 +81,32 @@ const routes = [
   //   name: 'login',
   //   component: LoginView,
   // },
+  {
+    path: '/mypage',
+    name: 'MyPage',
+    component: MyPageView,
+    beforeEnter: (to, from) => [removeQueryString],
+  },
 ]
+function removeQueryString(to) {
+  if (Object.keys(to.query).length > 0) {
+    return { path: to.path, query: {} }
+  }
+}
 
 const router = createRouter({
   history: createWebHistory('/'),
   // history: createWebHashHistory('/'),
   routes,
 })
+// 전역 가드
+// router.beforeEach((to, from) => {
+//   console.log('to: ', to)
+//   console.log('from: ', from)
+//   if (to.name === 'MyPage') {
+//     // return false
+//     return { name: 'Home' }
+//   }
+// })
 
 export default router

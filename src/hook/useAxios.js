@@ -21,7 +21,7 @@ export const useAxios = (url, config = {}, options = {}) => {
     ...options,
   }
 
-  console.log('🫥 : ', config.paramas)
+  // console.log('🫥 : ', config.paramas)
 
   const { params } = config
 
