@@ -3,7 +3,12 @@
     <h1>Board List</h1>
     <hr class="my-4" />
     <!-- 검색 폼 -->
-    <BoardFilter v-model:title="params.title_like" v-model:limit="params._limit" />
+    <!-- <BoardFilter v-model:title="params.title_like" v-model:limit="params._limit" /> -->
+    <BoardFilter
+      v-model:title="params.title_like"
+      :limit="params._limit"
+      @update:limit="chageLimit"
+    />
 
     <hr class="my-3" />
 
@@ -79,6 +84,11 @@ const params = ref({
   _limit: 3,
   title_like: '',
 })
+const chageLimit = (value) => {
+  params.value._limit = value
+  params.value._page = 1
+}
+
 const { response, data: boards, loading, error } = useAxios('/boards', { method: 'get', params })
 
 // 페이지네이션

@@ -4,7 +4,7 @@
       <div class="col">
         <input
           :value="title"
-          @input="$emit('update:title', $event.target.value)"
+          @input="changeTitle"
           type="text"
           class="form-control"
           placeholder="Search by title"
@@ -31,7 +31,13 @@ defineProps({
   title: String,
   limit: Number,
 })
-defineEmits(['updata:title', 'update:limit'])
+const emit = defineEmits(['updata:title', 'update:limit'])
+
+const changeTitle = (event) => {
+  setTimeout(() => {
+    emit('update:title', event.target.value)
+  }, 500)
+}
 </script>
 
 <style scoped></style>
