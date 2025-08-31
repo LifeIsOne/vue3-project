@@ -10,7 +10,7 @@
       <h2>{{ board.title }}</h2>
       <p class="content">{{ board.content }}</p>
       <p class="text-secondary">
-        {{ $dayjs(board.createdAt).format('YYYY. MM. DD HH:mm:ss') }}
+        {{ $dayjs(board.createdAt).format('YYYY년 MM월 DD일 HH:mm:ss') }}
       </p>
     </div>
 
@@ -65,7 +65,7 @@
 
 <script setup>
 import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
-import { computed, ref, toRef, toRefs } from 'vue'
+import { computed, toRefs } from 'vue'
 import { useAlert } from '@/composables/alert'
 import { useAxios } from '@/hook/useAxios'
 import { useNumber } from '@/composables/number'
@@ -94,7 +94,6 @@ const setBoard = ({ title, content, createdAt }) => {
 }
 
 // 삭제 로딩•에러 상태
-
 const {
   loading: removeLoading,
   error: removeError,

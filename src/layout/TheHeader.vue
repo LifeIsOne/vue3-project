@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar navbar-expand-sm bg-secondary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Miracle</a>
+        <RouterLink class="navbar-brand" to="/">Miracle</RouterLink>
         <button
           class="navbar-toggler"
           type="button"

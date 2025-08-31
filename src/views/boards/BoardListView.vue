@@ -16,9 +16,13 @@
 
     <AppError v-else-if="error" :msg="error.message" />
 
+    <template v-else-if="!isExist">
+      <p class="text-center py-5">No Result❗️📭</p>
+    </template>
+
     <!-- 게시물 items -->
     <template v-else>
-      <AppItemGrid :items="boards">
+      <AppItemGrid :items="boards" col-class="col-12 col-md-6 col-lg-4 ">
         <template v-slot="{ item }">
           <BoardItem
             :title="item.title"
@@ -84,12 +88,16 @@ const params = ref({
   _limit: 3,
   title_like: '',
 })
+
 const chageLimit = (value) => {
   params.value._limit = value
   params.value._page = 1
 }
 
 const { response, data: boards, loading, error } = useAxios('/boards', { method: 'get', params })
+
+// 검색 결과
+const isExist = computed(() => boards.value.length > 0)
 
 // 페이지네이션
 const totalBoardCount = computed(() => response.value.headers['x-total-count'])

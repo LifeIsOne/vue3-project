@@ -33,11 +33,13 @@ defineProps({
 })
 const emit = defineEmits(['updata:title', 'update:limit'])
 
+let debounce = null
+
 const changeTitle = (event) => {
-  setTimeout(() => {
+  clearTimeout(debounce)
+
+  debounce = setTimeout(() => {
     emit('update:title', event.target.value)
   }, 500)
 }
 </script>
-
-<style scoped></style>
