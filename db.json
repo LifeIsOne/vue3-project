@@ -89,6 +89,12 @@
       "content": "매일매일 행복하세요\n오늘도 싱그러운 하루 보내세요",
       "createdAt": 1756626888870,
       "id": 16
+    },
+    {
+      "title": "Test Board Title",
+      "content": "This is a test board content.",
+      "createdAt": 1765268996356,
+      "id": 17
     }
   ]
 }

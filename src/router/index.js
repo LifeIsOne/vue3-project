@@ -1,18 +1,19 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import AboutView from '@/views/AboutView.vue'
-import BoardCreateView from '@/views/boards/BoardCreateView.vue'
-import BoardDetailView from '@/views/boards/BoardDetailView.vue'
-import BoardEditView from '@/views/boards/BoardEditView.vue'
-import BoardListView from '@/views/boards/BoardListView.vue'
-import NotFoundView from '@/views/errors/NotFoundView.vue'
-import NestedView from '@/views/nested/NestedView.vue'
-import NestedHomeView from '@/views/nested/NestedHomeView.vue'
-import NestedOneView from '@/views/nested/NestedOneView.vue'
-import NestedTwoView from '@/views/nested/NestedTwoView.vue'
+// import HomeView from '@/HomeView.vue'
+import HomeView from '@/views/HomeView.vue'
+import AboutView from '@/views/AboutView.vue'
+import BoardCreateView from '@/views/boards/BoardCreateView.vue'
+import BoardDetailView from '@/views/boards/BoardDetailView.vue'
+import BoardEditView from '@/views/boards/BoardEditView.vue'
+import BoardListView from '@/views/boards/BoardListView.vue'
+import NotFoundView from '@/views/errors/NotFoundView.vue'
+import NestedView from '@/views/nested/NestedView.vue'
+import NestedHomeView from '@/views/nested/NestedHomeView.vue'
+import NestedOneView from '@/views/nested/NestedOneView.vue'
+import NestedTwoView from '@/views/nested/NestedTwoView.vue'
 // import { name } from '@vue/eslint-config-prettier/skip-formatting'
-// import LoginView from '@/views/boards/'
-import MyPageView from '@/views/MyPageView.vue'
+// import LoginView from '@/views/boards/'
+import MyPageView from '@/views/MyPageView.vue'
 
 const routes = [
   {
@@ -50,7 +51,7 @@ const routes = [
   // Error Page Route
   {
     path: '/:pathMatch(.*)*',
-    name: 'NotFont',
+    name: 'NotFound',
     component: NotFoundView,
   },
   // 중첩 컴포넌트

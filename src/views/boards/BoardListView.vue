@@ -69,7 +69,7 @@
 
 <script setup>
 import BoardItem from '@/components/boards/BoardItem.vue'
-import BoardDetailView from '@/views/boards/BoardDetailView.vue'
+import BoardDetailView from '@/views/boards/BoardDetailView.vue'
 import BoardModal from '@/components/boards/BoardModal.vue'
 import BoardFilter from '@/components/boards/BoardFilter.vue'
 import { computed, ref } from 'vue'

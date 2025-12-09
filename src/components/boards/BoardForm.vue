@@ -1,7 +1,7 @@
 <template>
   <form>
     <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">Title</label>
+      <label for="title" class="form-label">Title</label>
       <input
         v-focus
         :value="title"
